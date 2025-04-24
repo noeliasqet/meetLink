@@ -1,0 +1,156 @@
+/*********************************! COLORES BASE **********************************/
+:root {
+    --negro: #000000;
+    --azul: #B5F8FE;
+    --verde: #85D0B2;
+    --aqua: #6BDBAD;
+    --amarillo: #FFEDA4;
+    --naranja: #FFC93F;
+    --rojo: #FF6362;
+}
+
+/*********************************! GENERAL **********************************/
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--negro);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    margin-left: 220px;
+    padding: 1rem;
+    min-height: 100vh;
+    background-color: var(--negro);
+}
+
+@media (max-width: 768px) {
+}
+
+/*********************************! NAVBAR **********************************/
+.sidebar {
+    background-color: #111;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    z-index: 1030;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+}
+
+
+.sidebar .user-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--verde);
+    margin-bottom: 0.5rem;
+}
+
+
+.sidebar .user-info h5 {
+    color: var(--celeste);
+}
+
+.sidebar .nav-link {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--verde);
+    color: black;
+    border-radius: 5px;
+}
+
+.logout-btn {
+    background-color: var(--rojo);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #e95452;
+}
+
+.sidebar-footer {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+/*********************************! CREAR EVENTO **********************************/
+.card.text-dark {
+    background-color: var(--amarillo);
+    border: 2px solid var(--naranja);
+    border-radius: 12px;
+}
+
+/*********************************! CARDS EVENTOS **********************************/
+.event-card {
+    background-color: #222;
+    border-left: 4px solid var(--aqua);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.event-card h5 {
+    color: var(--celeste);
+    margin-bottom: 0.3rem;
+}
+
+.event-card small {
+    color: var(--naranja);
+}
+
+.event-card p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/*********************************! BOTONES EVENTO **********************************/
+.event-card a.btn {
+    background-color: transparent;
+    border: 1px solid var(--verde);
+    color: var(--verde-suave);
+    font-size: 0.85rem;
+}
+
+.event-card a.btn:hover {
+    background-color: var(--verde);
+    color: black;
+}
+
+/*********************************! SCROLLBAR EVENTO **********************************/
+.scroll-events {
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--verde) #222;
+}
+
+.scroll-events::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scroll-events::-webkit-scrollbar-thumb {
+    background-color: var(--verde);
+    border-radius: 4px;
+}
+
+.scroll-events::-webkit-scrollbar-track {
+    background: #222;
+}
