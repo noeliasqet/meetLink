@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 ##################! INDEX - USUARIO !#################
 
 class Usuario(AbstractUser):
+    username = models.CharField(max_length=25, verbose_name="Username", unique=True)
     nombre = models.CharField(max_length=50, verbose_name="Nombre") 
     apellidos = models.CharField(max_length=100, verbose_name="Apellidos")
     email = models.EmailField(unique=True, verbose_name="Email")
@@ -18,3 +19,5 @@ class Usuario(AbstractUser):
     class Meta:
         verbose_name = "Usuario"
         verbose_name_plural = "Usuarios"
+        
+        
