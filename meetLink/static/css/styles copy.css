@@ -1,4 +1,4 @@
-/*********************************! COLORES BASE **********************************/
+/*********************************! COLORES Y FUENTE **********************************/
 :root {
     --negro: #000000;
     --azul: #B5F8FE;
@@ -9,6 +9,14 @@
     --rojo: #FF6362;
 }
 
+
+.lexend-font {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /*********************************! GENERAL **********************************/
 
 html, body {
@@ -17,106 +25,102 @@ html, body {
     padding: 0;
     background-color: var(--negro);
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Lexend", sans-serif;
 }
 
 main {
-    background-color: var(--amarillo);
-    margin-left: 22rem;
-    padding: 2rem;
+    margin-left: 220px;
+    padding: 1rem;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: var(--negro);
 }
 
-@media (max-width: 1024px) {
-    main {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
 
 /*********************************! NAVBAR **********************************/
-
-.sidebar {
+#navbar {
     background-color: var(--negro);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 22rem;
+    width: 220px;
     height: 100vh;
     z-index: 1030;
-    display: flex;
-    flex-direction: column;
     padding: 2rem 1rem;
 }
 
-.sidebar .user-info img {
-    width: 10rem;
-    height: 10rem;
+#contenido-navbar {
+    flex-grow: 1 !important;
+    padding: 0;
+    height: 100vh;
+    overflow-y: visible;
+}
+
+#navbar .user-info img {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--verde);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.sidebar .user-info h5 {
-    color: var(--azul); /* Actualizado para usar el color azul */
+
+#navbar .user-info h5 {
+    color: var(--celeste);
 }
 
-.sidebar .nav-link {
+#navbar .nav-link {
     color: white;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.sidebar .nav-link.active {
+#navbar .nav-link.active {
     background-color: var(--verde);
     color: black;
-    border-radius: 0.5rem;
+    border-radius: 5px;
 }
 
 .logout-btn {
     background-color: var(--rojo);
     color: white;
     border: none;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
     font-weight: bold;
-    position: absolute;
-    bottom: 2rem;
-    width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .logout-btn:hover {
-    background-color: #e95452;
+    background-color: #ea120e;
+}
+
+.navbar-footer {
+    text-align: center;
+    padding-bottom: 1rem;
 }
 
 /*********************************! CREAR EVENTO **********************************/
-.card.text {
-    background-color: var(--negro);
-    color: var(--amarillo);
+.card.text-dark {
+    background-color: var(--amarillo);
     border: 2px solid var(--naranja);
-    border-radius: 1.2rem;
-    padding: 2rem;
-    text-align: center;
+    border-radius: 12px;
 }
 
 /*********************************! CARDS EVENTOS **********************************/
 .event-card {
-    background-color: var(--negro);
-    border-left: 0.4rem solid var(--aqua);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    background-color: #222;
+    border-left: 4px solid var(--aqua);
+    border-radius: 10px;
+    padding: 1rem;
 }
 
 .event-card h5 {
-    color: var(--amarillo);
-    margin-bottom: 0.6rem;
+    color: var(--celeste);
+    margin-bottom: 0.3rem;
 }
 
 .event-card small {
@@ -124,17 +128,16 @@ main {
 }
 
 .event-card p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
 }
 
 /*********************************! BOTONES EVENTO **********************************/
 .event-card a.btn {
     background-color: transparent;
     border: 1px solid var(--verde);
-    color: var(--aqua);
-    font-size: 1rem;
-    padding: 0.8rem 2rem;
+    color: var(--verde-suave);
+    font-size: 0.85rem;
 }
 
 .event-card a.btn:hover {
@@ -144,47 +147,21 @@ main {
 
 /*********************************! SCROLLBAR EVENTO **********************************/
 .scroll-events {
-    max-height: 30rem;
+    max-height: 500px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--verde) #222;
 }
 
 .scroll-events::-webkit-scrollbar {
-    width: 0.6rem;
+    width: 6px;
 }
 
 .scroll-events::-webkit-scrollbar-thumb {
     background-color: var(--verde);
-    border-radius: 0.4rem;
+    border-radius: 4px;
 }
 
 .scroll-events::-webkit-scrollbar-track {
     background: #222;
-}
-
-/*********************************! COLUMNA DE EVENTOS **********************************/
-.events-column {
-    background-color: var(--negro);
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 25rem;
-    height: 100vh;
-    z-index: 1020;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.events-column .event-card {
-    margin-bottom: 1rem;
-}
-
-/* Ajustes para pantallas más pequeñas */
-@media (max-width: 1024px) {
-    .events-column {
-        width: 20rem;
-    }
 }

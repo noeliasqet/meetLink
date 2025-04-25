@@ -8,13 +8,13 @@
 </button>
 
 <!-- Navbar -->
-<div class="offcanvas-md offcanvas-start sidebar" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarLabel">
+<div id="navbar" class="offcanvas-md offcanvas-start sidebar" tabindex="-1" aria-labelledby="sidebarLabel">
     <div class="offcanvas-header d-md-none">
         <h5 class="offcanvas-title text-light" id="sidebarLabel">Menú</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
     </div>
 
-    <div class="offcanvas-body d-flex flex-column">
+    <div id="contenido-navbar" class="offcanvas-body d-flex flex-column">
         <div class="user-info text-center mb-4">
             <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil">
             <h5 class="mt-2">{{ user.username }}</h5>
@@ -34,8 +34,8 @@
             {% csrf_token %}
             <button type="submit" class="btn logout-btn mt-4">Log Out</button>
         </form>
-        <div class="sidebar-footer">
-            meetLink &copy; 2025
+        <div class="navbar-footer">
+            meetLink - 2025
         </div>        
     </div>
 </div>
@@ -44,7 +44,7 @@
 <main class="content-wrapper pt-4 px-3">
     <div class="row">
         <!-- Parte central -->
-        <div class="col-md-6 mb-4">
+        <div id="columna-contenido" class="col-md-6 mb-4">
             <div class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>
                 <p>Planifica una nueva actividad o viaje y compártelo con tus contactos.</p>
@@ -53,7 +53,7 @@
         </div>
 
         <!-- Columna eventos -->
-        <div class="col-md-6 d-flex flex-column align-items-end">
+        <div id="columna-eventos" class="col-md-6 d-flex flex-column align-items-end">
             <div class="scroll-events w-100">
                 {% for evento in eventos %}
                     <div class="card event-card mb-3 p-3">
