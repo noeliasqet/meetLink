@@ -1,6 +1,7 @@
 /*********************************! COLORES Y FUENTE **********************************/
 :root {
     --negro: #000000;
+    --blanco: #FFFFFF;
     --azul: #B5F8FE;
     --verde: #85D0B2;
     --aqua: #6BDBAD;
@@ -18,7 +19,6 @@
 }
 
 /*********************************! GENERAL **********************************/
-
 html, body {
     height: 100%;
     margin: 0;
@@ -29,12 +29,14 @@ html, body {
 }
 
 main {
-    margin-left: 220px;
-    padding: 1rem;
+    display: flex;
+    flex-direction: row;
     min-height: 100vh;
-    background-color: var(--negro);
+    background-color: var(--amarillo);
+    justify-content: flex-start;
+    position: relative;
+    padding-top: 50px; /* Aseguramos que no se superponga con el navbar */
 }
-
 
 /*********************************! NAVBAR **********************************/
 #navbar {
@@ -44,7 +46,6 @@ main {
     justify-content: space-between;
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
     width: 220px;
     height: 100vh;
@@ -67,7 +68,6 @@ main {
     border: 2px solid var(--verde);
     margin-bottom: 0.5rem;
 }
-
 
 #navbar .user-info h5 {
     color: var(--celeste);
@@ -103,49 +103,57 @@ main {
     padding-bottom: 1rem;
 }
 
-/*********************************! CREAR EVENTO **********************************/
-.card.text-dark {
-    background-color: var(--amarillo);
-    border: 2px solid var(--naranja);
+/*********************************! MAIN CONTENT **********************************/
+
+#content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/*********************************! COLUMNA CONTENIDO **********************************/
+
+#columna-contenido {
+    max-width: 600px;
+    width: 100%;
+    margin-left: 200px;
+    padding: 2rem;
+}
+
+#card-crearEvento {
+    margin: auto;
+    text-align: center;
+    background-color: var(--negro);
+    border: 2px solid var(--negro);
     border-radius: 12px;
+    color: var(--blanco);
 }
 
-/*********************************! CARDS EVENTOS **********************************/
-.event-card {
-    background-color: #222;
-    border-left: 4px solid var(--aqua);
-    border-radius: 10px;
-    padding: 1rem;
+#card-crearEvento h4 {
+    color: var(--amarillo);
 }
 
-.event-card h5 {
-    color: var(--celeste);
-    margin-bottom: 0.3rem;
-}
-
-.event-card small {
-    color: var(--naranja);
-}
-
-.event-card p {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-}
-
-/*********************************! BOTONES EVENTO **********************************/
-.event-card a.btn {
-    background-color: transparent;
-    border: 1px solid var(--verde);
-    color: var(--verde-suave);
-    font-size: 0.85rem;
-}
-
-.event-card a.btn:hover {
+#btn-crearEvento {
     background-color: var(--verde);
-    color: black;
+    color: var(--negro);
+}
+
+/*********************************! COLUMNA EVENTOS **********************************/
+
+#columna-eventos {
+    background-color: var(--negro);
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    z-index: 1020;
 }
 
 /*********************************! SCROLLBAR EVENTO **********************************/
+
 .scroll-events {
     max-height: 500px;
     overflow-y: auto;
@@ -164,4 +172,39 @@ main {
 
 .scroll-events::-webkit-scrollbar-track {
     background: #222;
+}
+
+/*********************************! RESPONSIVE **********************************/
+
+@media (max-width: 991px) {
+    #navbar {
+        display: none; /* Ocultar navbar en dispositivos pequeños */
+    }
+    
+    /* Mostrar columna-eventos en la parte inferior en pantallas pequeñas */
+    #columna-eventos {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+
+    /* Asegurarse de que columna-contenido ocupa todo el ancho */
+    #columna-contenido {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    /* Botón hamburguesa visible */
+    .btn.btn-outline-light.d-md-none {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Redefinir margen en la card para que sea más responsivo */
+    #card-crearEvento {
+        margin: 0 auto;
+    }
 }

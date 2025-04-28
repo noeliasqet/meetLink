@@ -1,6 +1,7 @@
 /*********************************! COLORES Y FUENTE **********************************/
 :root {
     --negro: #000000;
+    --blanco: #FFFFFF;
     --azul: #B5F8FE;
     --verde: #85D0B2;
     --aqua: #6BDBAD;
@@ -29,10 +30,13 @@ html, body {
 }
 
 main {
+    display: flex;
     margin-left: 220px;
-    padding: 1rem;
     min-height: 100vh;
-    background-color: var(--negro);
+    background-color: var(--amarillo);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
 
@@ -103,14 +107,58 @@ main {
     padding-bottom: 1rem;
 }
 
-/*********************************! CREAR EVENTO **********************************/
-.card.text-dark {
-    background-color: var(--amarillo);
-    border: 2px solid var(--naranja);
-    border-radius: 12px;
+
+/*********************************! CONTENIDO - drcha **********************************/
+
+#content{
+    justify-content: flex-end;
+    margin-right: 0;
 }
 
-/*********************************! CARDS EVENTOS **********************************/
+
+/*********************************! COLUMNA CONTENIDO **********************************/
+
+#columna-contenido {
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
+}
+
+#card-crearEvento {
+    margin: auto;
+    text-align: center;
+    background-color: var(--negro);
+    border: 2px solid var(--negro);
+    border-radius: 12px;
+    color: var(--blanco);
+}
+
+
+#card-crearEvento h4 {
+    color: var(--amarillo);
+}
+
+#btn-crearEvento{
+    background-color: var(--verde);
+    color: var(--negro);
+}
+
+
+/*********************************! COLUMNA EVENTO **********************************/
+
+#columna-eventos{
+    background-color: var(--negro);
+    height: 100vh;
+    width: fit-content;
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+}
+
+
+/*********************************? CARDS EVENTOS **********************************/
 .event-card {
     background-color: #222;
     border-left: 4px solid var(--aqua);
@@ -132,7 +180,7 @@ main {
     font-size: 0.95rem;
 }
 
-/*********************************! BOTONES EVENTO **********************************/
+/*********************************? BOTONES EVENTO **********************************/
 .event-card a.btn {
     background-color: transparent;
     border: 1px solid var(--verde);
@@ -145,7 +193,7 @@ main {
     color: black;
 }
 
-/*********************************! SCROLLBAR EVENTO **********************************/
+/*********************************? SCROLLBAR EVENTO **********************************/
 .scroll-events {
     max-height: 500px;
     overflow-y: auto;
@@ -164,4 +212,47 @@ main {
 
 .scroll-events::-webkit-scrollbar-track {
     background: #222;
+}
+
+
+/*********************************! RESPONSIVE **********************************/
+
+@media (max-width: 768px) {
+    #navbar {
+        display: none;
+    }
+
+    .offcanvas-md {
+        position: fixed !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+    
+    /* Mostrar columna-eventos en la parte de abajo - pantallas pequeñas */
+    #columna-eventos {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+
+    #columna-contenido {
+        width: 100vh;
+        padding: 1rem;
+        margin: 0;
+        margin-bottom: 0;
+    }
+
+    /* Botón hamburguesa visible */
+    .btn.btn-outline-light.d-md-none {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Redefinir margen en la card para que sea más responsivo */
+    #card-crearEvento {
+        margin: 0 auto;
+    }
 }
