@@ -14,9 +14,10 @@ urlpatterns = [
     path('sesion/logout/', CustomLogoutView.as_view(), name='logout'),
     
     #! CONTACTOS !#
-    
+    path('contactos/', ContactosView.as_view(), name='contactos'),
     
     #! EVENTOS !#
+    path('eventos/', EventosView.as_view(), name='eventos'),
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

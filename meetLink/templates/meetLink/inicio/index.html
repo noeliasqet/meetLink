@@ -1,14 +1,15 @@
 {% extends "meetLink/base.html" %}
+{% load static %}
 
 {% block contenido %}
 
 <!-- Botón desplegar menú (pantallas pequeñas) -->
-<button class="btn-toggle-menu btn btn-outline-light d-md-none m-2" type="button" onclick="toggleMenu()" aria-controls="navbar">
+<button id="toggle-button" class="btn-toggle-menu btn btn-outline-light d-md-none m-2" type="button" onclick="toggleMenu()" aria-controls="navbar">
     ☰
 </button>
 
 <!-- Navbar -->
-<div id="navbar" class="sidebar offcanvas-md offcanvas-start" tabindex="-1" aria-labelledby="sidebarLabel" style="display: none;">
+<div id="navbar" class="sidebar offcanvas-md offcanvas-start" tabindex="-1" aria-labelledby="sidebarLabel">
     <div class="offcanvas-header d-md-none">
         <h5 class="offcanvas-title text-light" id="sidebarLabel">Menú</h5>
         <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar">×</button>
@@ -21,13 +22,13 @@
         </div>
         <ul class="nav flex-column mb-4">
             <li class="nav-item">
-                <a class="nav-link active" href="#">INICIO</a>
+                <a class="nav-link active" href="{% url 'index' %}">INICIO</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">CONTACTOS</a>
+                <a class="nav-link" href="{% url 'contactos' %}">CONTACTOS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">EVENTOS</a>
+                <a class="nav-link" href="{% url 'eventos' %}">EVENTOS</a>
             </li>
         </ul>
         <form action="{% url 'logout' %}" method="post" class="mt-auto text-center">
@@ -40,7 +41,6 @@
     </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <!-- MAIN CONTENT -->
 <main class="content-wrapper">
     <div id="content" class="row flex-column">
@@ -71,30 +71,7 @@
     </div>
 </main>
 
-
-<!-- JavaScript para manejar el menú móvil -->
-<script>
-    function toggleMenu() {
-        const navbar = document.getElementById('navbar');
-        if (navbar.style.display === 'none' || navbar.style.display === '') {
-            navbar.style.display = 'block';
-        } else {
-            navbar.style.display = 'none';
-        }
-    }
-
-    // Mostrar automáticamente el menú si pantalla es md o más (simulación de 'offcanvas-md')
-    function handleResize() {
-        const navbar = document.getElementById('navbar');
-        if (window.innerWidth >= 768) {
-            navbar.style.display = 'block';
-        } else if (!document.querySelector('.btn-toggle-menu').classList.contains('open')) {
-            navbar.style.display = 'none';
-        }
-    }
-
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('DOMContentLoaded', handleResize);
-</script>
-
 {% endblock %}
+
+{% block cargajs %}<script src="{% static 'js/script.js' %}"></script>{% endblock %}
+

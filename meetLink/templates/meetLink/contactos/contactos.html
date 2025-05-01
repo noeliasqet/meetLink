@@ -1,0 +1,56 @@
+{% extends "meetLink/base.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<!-- Botón desplegar menú (pantallas pequeñas) -->
+<button id="toggle-button" class="btn-toggle-menu btn btn-outline-light d-md-none m-2" type="button" onclick="toggleMenu()" aria-controls="navbar">
+    ☰
+</button>
+
+<!-- Navbar -->
+<div id="navbar" class="sidebar offcanvas-md offcanvas-start" tabindex="-1" aria-labelledby="sidebarLabel">
+    <div class="offcanvas-header d-md-none">
+        <h5 class="offcanvas-title text-light" id="sidebarLabel">Menú</h5>
+        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar">×</button>
+    </div>
+
+    <div id="contenido-navbar" class="offcanvas-body d-flex flex-column">
+        <div class="user-info text-center mb-4">
+            <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil">
+            <h5 class="mt-2">{{ user.username }}</h5>
+        </div>
+        <ul class="nav flex-column mb-4">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">INICIO</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'contactos' %}">CONTACTOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'eventos' %}">EVENTOS</a>
+            </li>
+        </ul>
+        <form action="{% url 'logout' %}" method="post" class="mt-auto text-center">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-btn mt-4">Log Out</button>
+        </form>
+        <div class="navbar-footer">
+            meetLink - 2025
+        </div>        
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="content-wrapper">
+    <div id="content" class="row flex-column">
+       
+    </div>
+</main>
+
+{% endblock %}
+
+{% block cargajs %}
+  <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+
