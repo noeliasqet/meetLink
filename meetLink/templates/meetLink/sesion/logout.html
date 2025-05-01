@@ -1,0 +1,13 @@
+{% extends "meetLink/base.html" %}
+
+{% block contenido %}
+<div id="form" class="d-flex align-items-center justify-content-center" style="background-color: #bced09;">
+    <div id="form-card" class="p-5 bg-white rounded shadow">
+        <h2 class="mb-4 text-center">Hasta pronto, {{ user.username }}</h2>
+        <p class="text-center">Has cerrado sesión correctamente.</p>
+        <div class="text-center">
+            <a href="{% url 'login' %}" class="btn btn-primary w-100 mb-2">Iniciar sesión de nuevo</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

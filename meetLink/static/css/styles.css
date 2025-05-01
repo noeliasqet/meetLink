@@ -25,7 +25,6 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: var(--negro);
-    color: white;
     font-family: "Lexend", sans-serif;
 }
 
@@ -39,6 +38,14 @@ main {
     position: relative;
 }
 
+/* main {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    min-height: 100vh;
+    background-color: var(--amarillo);
+    position: relative;
+} */
 
 /*********************************! NAVBAR **********************************/
 #navbar {
@@ -59,8 +66,9 @@ main {
 #contenido-navbar {
     flex-grow: 1 !important;
     padding: 0;
-    height: 100vh;
+    height: 100%;
     overflow-y: visible;
+    color: var(--blanco);
 }
 
 #navbar .user-info img {
@@ -72,9 +80,8 @@ main {
     margin-bottom: 0.5rem;
 }
 
-
 #navbar .user-info h5 {
-    color: var(--celeste);
+    color: var(--azul);
 }
 
 #navbar .nav-link {
@@ -105,6 +112,7 @@ main {
 .navbar-footer {
     text-align: center;
     padding-bottom: 1rem;
+    color: var(--blanco)
 }
 
 
@@ -156,6 +164,22 @@ main {
     padding: 2rem 1rem;
     overflow-y: auto;
 }
+
+
+/* #columna-eventos {
+    background-color: var(--negro);
+    height: 15rem;
+    position: static;
+    right: 0;
+    bottom: 0;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+} */
+
 
 
 /*********************************? CARDS EVENTOS **********************************/
@@ -244,15 +268,99 @@ main {
         margin-bottom: 0;
     }
 
-    /* Botón hamburguesa visible */
+    /* Burger button visible */
     .btn.btn-outline-light.d-md-none {
         display: block;
     }
 }
 
 @media (max-width: 576px) {
-    /* Redefinir margen en la card para que sea más responsivo */
+    /* Redefinir margen en la card */
     #card-crearEvento {
         margin: 0 auto;
     }
 }
+
+
+/*********************************! FORMULARIOS **********************************/
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+#form {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1;
+}
+
+#form-card {
+    color: var(--negro) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    max-height: 90%;
+    margin: 2rem;
+}
+
+
+/*? POR REVISAR: */
+/* @media (max-width: 768px) { */
+    /* #navbar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100vh;
+        background-color: var(--negro);
+        z-index: 1050;
+        padding: 2rem 1rem;
+    }
+
+    #navbar.show {
+        display: flex;
+    }
+
+    #columna-contenido {
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+    }
+
+    #columna-eventos {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        background-color: transparent;
+        overflow-y: visible;
+    }
+
+    .scroll-events {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .event-card {
+        flex: 1 1 250px;
+        max-width: 300px;
+    }
+
+    /* Burger button */
+    /* .btn.btn-outline-light.d-md-none {
+        display: block;
+    } */
+/* } */
