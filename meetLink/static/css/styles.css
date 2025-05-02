@@ -8,6 +8,9 @@
     --amarillo: #FFEDA4;
     --naranja: #FFC93F;
     --rojo: #FF6362;
+
+    --sidebar-width: 220px;
+    --sidebar-width-collapsed: 80px;
 }
 
 
@@ -26,49 +29,75 @@ html, body {
     padding: 0;
     background-color: var(--negro);
     font-family: "Lexend", sans-serif;
+    overflow-x: hidden;
 }
+
 
 main {
-    display: flex;
-    margin-left: 220px;
     min-height: 100vh;
-    background-color: var(--amarillo);
-    justify-content: space-between;
+    margin-left: var(--sidebar-width);
+    padding-right: 300px;
+    display: block;
     align-items: center;
-    position: relative;
+    align-content: center;
+    background-color: var(--amarillo);
 }
 
-/* main {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    min-height: 100vh;
-    background-color: var(--amarillo);
-    position: relative;
-} */
+.collapsed~.main-content {
+    margin-left: var(--sidebar-width-collapsed);
+}
 
 /*********************************! NAVBAR **********************************/
-#navbar {
-    background-color: var(--negro);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 220px;
+
+.sidebar {
+    width: var(--sidebar-width);
     height: 100vh;
-    z-index: 1030;
+    background: var(--negro);
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+    color: var(--blanco);
+    justify-content: space-between;
     padding: 2rem 1rem;
+
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-width-collapsed);
+}
+
+.sidebar-link {
+    color: var(--blanco);
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.sidebar-link:hover {
+    background-color: var(--verde);
+    color: white;
+}
+
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.logo-text {
+    color: var(--azul);
 }
 
 #contenido-navbar {
-    flex-grow: 1 !important;
-    padding: 0;
     height: 100%;
-    overflow-y: visible;
-    color: var(--blanco);
+}
+
+#navbar .user-info{
+    padding-bottom: 2rem;
 }
 
 #navbar .user-info img {
@@ -78,22 +107,25 @@ main {
     object-fit: cover;
     border: 2px solid var(--verde);
     margin-bottom: 0.5rem;
+    z-index: 300000;
 }
 
 #navbar .user-info h5 {
     color: var(--azul);
 }
 
-#navbar .nav-link {
+#navbar .sidebar-link {
     color: white;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    padding: 0.5rem;
 }
 
-#navbar .nav-link.active {
+#navbar .sidebar-link.active {
     background-color: var(--verde);
     color: black;
     border-radius: 5px;
+    padding: 0.5rem;
 }
 
 .logout-btn {
@@ -130,6 +162,8 @@ main {
     max-width: 600px;
     width: 100%;
     padding: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 #card-crearEvento {
@@ -166,6 +200,7 @@ main {
 }
 
 
+
 /* #columna-eventos {
     background-color: var(--negro);
     height: 15rem;
@@ -178,7 +213,11 @@ main {
     flex-wrap: wrap;
     flex-direction: row;
     align-items: baseline;
-} */
+} 
+    background-color: var(--negro);
+    padding: 2rem 1rem;
+    overflow-y: auto;    
+*/
 
 
 
@@ -191,7 +230,7 @@ main {
 }
 
 .event-card h5 {
-    color: var(--celeste);
+    color: var(--azul);
     margin-bottom: 0.3rem;
 }
 
@@ -208,7 +247,7 @@ main {
 .event-card a.btn {
     background-color: transparent;
     border: 1px solid var(--verde);
-    color: var(--verde-suave);
+    color: var(--aqua);
     font-size: 0.85rem;
 }
 
@@ -241,44 +280,48 @@ main {
 
 /*********************************! RESPONSIVE **********************************/
 
-@media (max-width: 768px) {
-    #navbar {
-        display: none;
-    }
-
-    .offcanvas-md {
-        position: fixed !important;
-        transform: none !important;
-        visibility: visible !important;
-    }
-    
-    /* Mostrar columna-eventos en la parte de abajo - pantallas pequeñas */
-    #columna-eventos {
-        position: static;
-        width: 100%;
-        height: auto;
-        padding: 1rem;
-        margin-top: 2rem;
-    }
-
-    #columna-contenido {
-        width: 100vh;
-        padding: 1rem;
-        margin: 0;
-        margin-bottom: 0;
-    }
-
-    /* Burger button visible */
-    .btn.btn-outline-light.d-md-none {
-        display: block;
-    }
+/* Toggle button */
+.toggle-btn {
+    position: absolute;
+    right: -15px;
+    top: 20px;
+    background: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 300000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-@media (max-width: 576px) {
-    /* Redefinir margen en la card */
-    #card-crearEvento {
-        margin: 0 auto;
-    }
+.collapsed .toggle-btn {
+    transform: rotate(180deg);
+}
+
+.collapsed .hide-on-collapse,
+.collapsed .logo-text,
+.collapsed .profile-info,
+.collapsed .navbar-footer {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+}
+
+.collapsed .sidebar-link {
+    text-align: center;
+    padding: 1rem !important;
+    margin: 4px 8px;
+}
+
+.collapsed .sidebar-link i {
+    margin: 0 !important;
+}
+
+.profile-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 
@@ -308,59 +351,3 @@ main {
     max-height: 90%;
     margin: 2rem;
 }
-
-
-/*? POR REVISAR: */
-/* @media (max-width: 768px) { */
-    /* #navbar {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 220px;
-        height: 100vh;
-        background-color: var(--negro);
-        z-index: 1050;
-        padding: 2rem 1rem;
-    }
-
-    #navbar.show {
-        display: flex;
-    }
-
-    #columna-contenido {
-        width: 100%;
-        padding: 1rem;
-        margin: 0;
-    }
-
-    #columna-eventos {
-        position: static;
-        width: 100%;
-        height: auto;
-        padding: 1rem 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        background-color: transparent;
-        overflow-y: visible;
-    }
-
-    .scroll-events {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        max-height: none;
-        overflow: visible;
-    }
-
-    .event-card {
-        flex: 1 1 250px;
-        max-width: 300px;
-    }
-
-    /* Burger button */
-    /* .btn.btn-outline-light.d-md-none {
-        display: block;
-    } */
-/* } */

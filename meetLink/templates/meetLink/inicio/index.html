@@ -3,58 +3,74 @@
 
 {% block contenido %}
 
-<!-- Botón desplegar menú (pantallas pequeñas) -->
-<button id="toggle-button" class="btn-toggle-menu btn btn-outline-light d-md-none m-2" type="button" onclick="toggleMenu()" aria-controls="navbar">
-    ☰
-</button>
+{% comment %} NAVBAR {% endcomment %}
 
-<!-- Navbar -->
-<div id="navbar" class="sidebar offcanvas-md offcanvas-start" tabindex="-1" aria-labelledby="sidebarLabel">
-    <div class="offcanvas-header d-md-none">
-        <h5 class="offcanvas-title text-light" id="sidebarLabel">Menú</h5>
+<nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+    <button class="toggle-btn" onclick="toggleSidebar()">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="d-md-none">
+        <h5 class="text-light" id="sidebarLabel">Menú</h5>
         <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar">×</button>
     </div>
 
-    <div id="contenido-navbar" class="offcanvas-body d-flex flex-column">
-        <div class="user-info text-center mb-4">
-            <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil">
-            <h5 class="mt-2">{{ user.username }}</h5>
+    <div id="contenido-navbar" class="d-flex flex-column">
+        <div class="p-4" style="text-align: center; padding-bottom: 1rem">
+            <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
         </div>
-        <ul class="nav flex-column mb-4">
+
+        <div class="user-info text-center mb-4">
+            <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
+            <h5 class="text-white mb-0 hide-on-collapse">{{ user.username }}</h5>
+        </div>
+
+        <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'index' %}">INICIO</a>
+                <a class="sidebar-link active text-decoration-none" href="{% url 'index' %}">
+                    <i class="fas fa-home me-2"></i>
+                    <span class="hide-on-collapse">INICIO</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'contactos' %}">CONTACTOS</a>
+                <a class="sidebar-link text-decoration-none" href="{% url 'contactos' %}">
+                    <i class="fas fa-address-book me-2"></i>
+                    <span class="hide-on-collapse">CONTACTOS</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'eventos' %}">EVENTOS</a>
+                <a class="sidebar-link text-decoration-none" href="{% url 'eventos' %}">
+                    <i class="fas fa-calendar-alt me-2"></i>
+                    <span class="hide-on-collapse">EVENTOS</span>
+                </a>
             </li>
         </ul>
+
         <form action="{% url 'logout' %}" method="post" class="mt-auto text-center">
             {% csrf_token %}
-            <button type="submit" class="btn logout-btn mt-4">Log Out</button>
+            <button type="submit" class="btn logout-btn mt-4 hide-on-collapse">Log Out</button>
         </form>
+
         <div class="navbar-footer">
-            meetLink - 2025
-        </div>        
+            MNSF - 2025
+        </div>
     </div>
-</div>
+</nav>
 
 <!-- MAIN CONTENT -->
-<main class="content-wrapper">
-    <div id="content" class="row flex-column">
+<main class="main-content">
+    <div id="content" class="container-fluid">
         <!-- Parte central -->
-        <div id="columna-contenido" class="col-12 mb-4">
+        <div id="columna-contenido" class="mb-4">
             <div id="card-crearEvento" class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>
                 <p>Planifica una nueva actividad o viaje y compártelo con tus contactos.</p>
-                <a id="btn-crearEvento" class="btn btn-outline border-dark">CREAR</a>
+                <a id="btn-crearEvento" href="#" class="btn btn-outline border-dark">CREAR</a>
             </div>
         </div>
 
         <!-- Columna eventos abajo en línea -->
-        <div id="columna-eventos" class="col-12 d-flex flex-wrap gap-3">
+        <div id="columna-eventos" class="d-flex flex-wrap gap-3">
             <div class="scroll-events d-flex flex-wrap w-100">
                 {% for evento in eventos %}
                     <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px;">
@@ -71,7 +87,12 @@
     </div>
 </main>
 
-{% endblock %}
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('collapsed');
+    }
+</script>
 
-{% block cargajs %}<script src="{% static 'js/script.js' %}"></script>{% endblock %}
+{% endblock %}
 
