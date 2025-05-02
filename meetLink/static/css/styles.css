@@ -70,7 +70,6 @@ main {
     transition: all 0.2s ease;
     border-radius: 8px;
     white-space: nowrap;
-    /* overflow: hidden; */
     display: flex;
     align-items: center;
     font-weight: bold;
@@ -78,14 +77,35 @@ main {
     padding: 0.5rem;
 }
 
-.sidebar-link:hover {
-    background-color: var(--verde);
+.sidebar-link {
     color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.sidebar-link:hover {
+    background-color: var(--azul);
+    color: var(--negro);
 }
 
 .sidebar-link.active {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+    background-color: var(--verde);
+    color: black;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.sidebar-link.active:hover {
+    background-color: var(--azul);
+    color: var(--negro);
+}
+
+.collapsed .sidebar-link {
+    width: 30% !important;
+    justify-content: center;
+    padding: 0.5rem !important;
+    margin: 0.5rem auto;
 }
 
 .logo-text {
@@ -93,7 +113,9 @@ main {
 }
 
 #contenido-navbar {
-    height: 100%;
+    height: 100vh;
+    position: fixed;
+    padding-bottom: 3rem;
 }
 
 #navbar .user-info{
@@ -107,25 +129,10 @@ main {
     object-fit: cover;
     border: 2px solid var(--verde);
     margin-bottom: 0.5rem;
-    z-index: 300000;
 }
 
 #navbar .user-info h5 {
     color: var(--azul);
-}
-
-#navbar .sidebar-link {
-    color: white;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-}
-
-#navbar .sidebar-link.active {
-    background-color: var(--verde);
-    color: black;
-    border-radius: 5px;
-    padding: 0.5rem;
 }
 
 .logout-btn {
@@ -183,6 +190,10 @@ main {
 #btn-crearEvento{
     background-color: var(--verde);
     color: var(--negro);
+}
+
+#btn-crearEvento:hover{
+    background-color: var(--azul);
 }
 
 
