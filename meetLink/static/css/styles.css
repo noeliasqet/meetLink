@@ -209,7 +209,13 @@ main {
     padding: 2rem 1rem;
     overflow-y: auto;
 }
-
+/* 
+.resizable {
+    resize: horizontal;
+    overflow: auto;
+    min-width: 100px;
+    max-width: 100%;
+  } */
 
 
 /* #columna-eventos {

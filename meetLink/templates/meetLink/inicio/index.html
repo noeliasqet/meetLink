@@ -3,8 +3,6 @@
 
 {% block contenido %}
 
-{% comment %} NAVBAR {% endcomment %}
-
 <nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
     <button class="toggle-btn" onclick="toggleSidebar()">
         <i class="fas fa-chevron-left"></i>
@@ -15,7 +13,7 @@
     </div>
 
     <div id="contenido-navbar" class="d-flex flex-column">
-        <div class="p-4" style="text-align: center; padding-bottom: 1rem">
+        <div class="p-4 text-center pb-3">
             <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
         </div>
 
@@ -56,9 +54,8 @@
     </div>
 </nav>
 
-<!-- MAIN CONTENT -->
 <main class="main-content">
-    <div id="content" class="container-fluid">
+    <div id="content" class="container-fluid d-flex flex-column flex-md-row justify-content-between">
         <!-- Parte central -->
         <div id="columna-contenido" class="mb-4">
             <div id="card-crearEvento" class="card text p-3">
@@ -68,20 +65,18 @@
             </div>
         </div>
 
-        <!-- Columna eventos abajo en línea -->
-        <div id="columna-eventos" class="d-flex flex-wrap gap-3">
-            <div class="scroll-events d-flex flex-wrap w-100">
-                {% for evento in eventos %}
-                    <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px;">
-                        <h5>{{ evento.nombre }}</h5>
-                        <small>{{ evento.fecha|date:"d/m/Y" }}</small>
-                        <p>{{ evento.descripcion|truncatewords:15 }}</p>
-                        <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a>
-                    </div>
-                {% empty %}
-                    <p class="text-light">Todavía no hay eventos disponibles.</p>
-                {% endfor %}
-            </div>
+        <!-- Eventos -->
+        <div id="columna-eventos" class="scroll-events d-flex flex-wrap gap-3">
+            {% for evento in eventos %}
+                <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px;">
+                    <h5>{{ evento.nombre }}</h5>
+                    <small>{{ evento.fecha|date:"d/m/Y" }}</small>
+                    <p>{{ evento.descripcion|truncatewords:15 }}</p>
+                    <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a>
+                </div>
+            {% empty %}
+                <p class="text-light">Todavía no hay eventos disponibles.</p>
+            {% endfor %}
         </div>
     </div>
 </main>
@@ -94,4 +89,3 @@
 </script>
 
 {% endblock %}
-
