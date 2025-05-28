@@ -15,9 +15,18 @@ urlpatterns = [
     
     #! CONTACTOS !#
     path('contactos/', ContactosView.as_view(), name='contactos'),
+    path('contactos/create', ContactosCreateView.as_view(), name='contactos_create'),
+    path('contactos/update/<int:pk>', ContactosUpdateView.as_view(), name='contactos_update'),
+
+    #! GRUPOS DE CONTACTO !#
+    path('grupo/create', GrupoContactoCreateView.as_view(), name='grupo_create'),
+    path('grupo/update/<int:pk>', GrupoContactoUpdateView.as_view(), name='grupo_update'),
     
     #! EVENTOS !#
     path('eventos/', EventosView.as_view(), name='eventos'),
+    path('eventos/create', EventosCreateView.as_view(), name='eventos_create'),
+    path('eventos/update/<int:pk>', EventosUpdateView.as_view(), name='eventos_update'),
+    
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

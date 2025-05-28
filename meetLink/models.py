@@ -26,12 +26,13 @@ class Usuario(AbstractUser):
 ##################! CONTACTOS !#################
 class Contacto(models.Model):
     nombre = models.CharField(max_length=20, verbose_name="Nombre")
-    mail = models.EmailField(unique=True, verbose_name="Email")
+    mail = models.EmailField(verbose_name="Email")
     telefono = models.CharField(
         max_length=9,
         validators=[RegexValidator(regex=r'^\d{9}$', message='El número debe tener 9 dígitos.')],
         verbose_name="Teléfono"
     )
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Usuario')
 
     def __str__(self):
         return self.nombre
@@ -39,6 +40,7 @@ class Contacto(models.Model):
     class Meta:
         verbose_name = "Contacto"
         verbose_name_plural = "Contactos"
+        unique_together = ('usuario', 'mail')
 
 class GrupoContacto(models.Model):
     nombre = models.CharField(max_length=20, verbose_name="Nombre del grupo")
@@ -59,22 +61,19 @@ class GrupoContacto(models.Model):
 class Evento(models.Model):
     nombre = models.CharField(max_length=25, verbose_name="Nombre")
     descripcion = models.CharField(max_length=50, verbose_name="Descripción")
+    ubicacion = models.CharField(max_length=50, default="Por definir", verbose_name="Ubicación")
     fecha_inicio = models.DateTimeField(verbose_name="Fecha de inicio")
     fecha_fin = models.DateTimeField(verbose_name="Fecha de fin")
     transporte = models.CharField(max_length=20, verbose_name="Medio de transporte")
     presupuesto = models.BooleanField(default=False, verbose_name="Presupuesto")
-    asistentes = models.ManyToManyField('Contacto', through='Asistencia', blank=True, verbose_name="Asistentes")
+    grupo = models.ForeignKey('GrupoContacto', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Grupo de Contacto")
     maleta = models.BooleanField(default=False, verbose_name="Maleta")
     todo = models.BooleanField(default=False, verbose_name="To Do")
     p_alojamiento = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
     p_transporte = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
     p_comida = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
     p_otros = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
-    telefono = models.CharField(
-        max_length=9,
-        validators=[RegexValidator(regex=r'^\d{9}$', message='El número debe tener 9 dígitos.')],
-        verbose_name="Teléfono"
-    )
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Usuario')
 
     def __str__(self):
         return self.nombre
@@ -83,27 +82,14 @@ class Evento(models.Model):
         verbose_name = "Evento"
         verbose_name_plural = "Eventos"
 
-class EventosUsuario(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, verbose_name="Evento")
+# class Asistencia(models.Model):
+#     evento = models.ForeignKey(Evento, on_delete=models.CASCADE, verbose_name="Evento")
+#     asistente = models.ForeignKey(Contacto, on_delete=models.CASCADE, verbose_name="Asistente")
+#     asistencia = models.BooleanField(default=False, verbose_name="Asistencia confirmada")
 
-    def __str__(self):
-        return f"{self.usuario.username} - {self.evento.nombre}"
+#     def __str__(self):
+#         return f"{self.asistente.nombre} - {self.evento.nombre}"
 
-    class Meta:
-        verbose_name = "Evento de Usuario"
-        verbose_name_plural = "Eventos de Usuario"
-
-
-
-class Asistencia(models.Model):
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, verbose_name="Evento")
-    asistente = models.ForeignKey(Contacto, on_delete=models.CASCADE, verbose_name="Asistente")
-    asistencia = models.BooleanField(default=False, verbose_name="Asistencia confirmada")
-
-    def __str__(self):
-        return f"{self.asistente.nombre} - {self.evento.nombre}"
-
-    class Meta:
-        verbose_name = "Asistencia"
-        verbose_name_plural = "Asistencias"
+#     class Meta:
+#         verbose_name = "Asistencia"
+#         verbose_name_plural = "Asistencias"

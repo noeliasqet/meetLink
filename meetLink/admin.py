@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Usuario, Contacto, GrupoContacto, Evento, EventosUsuario, Asistencia
+from .models import Usuario, Contacto, GrupoContacto, Evento
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):   
@@ -12,7 +12,7 @@ class UsuarioAdmin(admin.ModelAdmin):
     
 @admin.register(Contacto)
 class ContactoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'mail', 'telefono')
+    list_display = ('nombre', 'mail', 'telefono', 'usuario')
     search_fields = ('nombre', 'mail', 'telefono')
     list_filter = ('nombre',)
     ordering = ('nombre',)
@@ -33,44 +33,27 @@ class GrupoContactoAdmin(admin.ModelAdmin):
     
 @admin.register(Evento)
 class EventoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'transporte', 'presupuesto', 'maleta', 'todo', 'p_alojamiento', 'p_transporte', 'p_comida', 'p_otros')
+    list_display = ('nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin', 'transporte', 'presupuesto', 'grupo', 'maleta', 'todo', 'p_alojamiento', 'p_transporte', 'p_comida', 'p_otros')
     search_fields = ('nombre', 'descripcion', 'fecha_inicio')
     list_filter = ('nombre', 'descripcion', 'fecha_inicio')
     ordering = ('fecha_inicio',)
     
     def mostrar_asistentes(self, obj):
         return ", ".join([a.nombre for a in obj.asistentes.all()])
-    mostrar_asistentes.short_description = "Asistentes"
-
-
-@admin.register(EventosUsuario)
-class EventosUsuarioAdmin(admin.ModelAdmin):
-    list_display = ('get_usuario', 'get_evento')
-    search_fields = ('usuario__username', 'evento__nombre')
-    list_filter = ('usuario', 'evento')
-    ordering = ('usuario',)
-
-    def get_usuario(self, obj):
-        return obj.usuario.username
-    get_usuario.short_description = 'Usuario'
-
-    def get_evento(self, obj):
-        return obj.evento.nombre
-    get_evento.short_description = 'Evento'
-    
+    mostrar_asistentes.short_description = "Asistentes"    
     
 
-@admin.register(Asistencia)
-class AsistenciaAdmin(admin.ModelAdmin):
-    list_display = ('get_evento', 'get_asistente', 'asistencia')
-    search_fields = ('evento__nombre', 'asistente__nombre')
-    list_filter = ('evento', 'asistencia')
-    ordering = ('evento',)
+# @admin.register(Asistencia)
+# class AsistenciaAdmin(admin.ModelAdmin):
+#     list_display = ('get_evento', 'get_asistente', 'asistencia')
+#     search_fields = ('evento__nombre', 'asistente__nombre')
+#     list_filter = ('evento', 'asistencia')
+#     ordering = ('evento',)
 
-    def get_evento(self, obj):
-        return obj.evento.nombre
-    get_evento.short_description = 'Evento'
+#     def get_evento(self, obj):
+#         return obj.evento.nombre
+#     get_evento.short_description = 'Evento'
 
-    def get_asistente(self, obj):
-        return obj.asistente.nombre
-    get_asistente.short_description = 'Asistente'
+#     def get_asistente(self, obj):
+#         return obj.asistente.nombre
+#     get_asistente.short_description = 'Asistente'

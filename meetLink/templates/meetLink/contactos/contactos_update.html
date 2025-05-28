@@ -1,0 +1,29 @@
+{% extends "meetLink/base.html" %}
+
+{% block contenido %}
+
+<div id="form" class="d-flex align-items-center justify-content-center" style="background-color: #85D0B2;">
+    <div id="form-card" class="p-5 bg-white rounded shadow">
+        <h2 class="mb-4 text-center">Editar Contacto</h2>
+
+        {# Mostrar mensajes (éxito o error) si los hay #}
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+        </form>
+        <p class="mt-3 text-center"><a href="{% url 'contactos' %}">Volver a la lista de contactos</a></p>
+    </div>
+</div>
+
+{% endblock %}

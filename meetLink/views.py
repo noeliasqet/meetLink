@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,7 +6,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from .forms import UsuarioCreationForm
+from .forms import UsuarioCreationForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm
+from .models import Contacto, GrupoContacto, Evento
+
 
 
 ############################! INDEX !###########################
@@ -72,15 +74,82 @@ class ContactosView(LoginRequiredMixin, TemplateView):
         return contexto
     
 class ContactosCreateView(LoginRequiredMixin, CreateView):
+    model = Contacto
+    form_class = ContactoCreationForm
     template_name = 'meetLink/contactos/contactos_create.html'
-    
+    success_url = reverse_lazy('contactos')
+
+    def form_valid(self, form):
+        # Asignamos el usuario logueado al contacto
+        form.instance.usuario = self.request.user
+
+        # Validación opcional: evitar contactos duplicados por email en el mismo usuario
+        if Contacto.objects.filter(usuario=self.request.user, mail=form.cleaned_data['mail']).exists():
+            messages.error(self.request, "Ya tienes un contacto con ese email.")
+            return render(self.request, self.template_name, {"form": form})
+
+        return super().form_valid(form)
+
+class ContactosUpdateView(LoginRequiredMixin, UpdateView):
+    model = Contacto
+    form_class = ContactoUpdateForm
+    template_name = 'meetLink/contactos/contactos_update.html'
+    success_url = reverse_lazy('contactos')
+
+    def get_object(self, queryset=None):
+        # Aseguramos que solo se pueda editar un contacto propio
+        return get_object_or_404(Contacto, pk=self.kwargs['pk'], usuario=self.request.user)
+
+    def form_valid(self, form):
+        # Validación opcional: evitar duplicados por email (excluyendo el propio contacto)
+        if Contacto.objects.filter(
+            usuario=self.request.user,
+            mail=form.cleaned_data['mail']
+        ).exclude(pk=self.object.pk).exists():
+            messages.error(self.request, "Ya tienes un contacto con ese email.")
+            return self.form_invalid(form)
+        
+        return super().form_valid(form)
     
 class ContactosDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'meetLink/contactos/contactos_delete.html'
     
 
-class ContactosUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'meetLink/contactos/contactos_update.html'
+
+############################! GRUPOS CONTACTO !###########################
+class GrupoContactoCreateView(LoginRequiredMixin, CreateView):
+    model = GrupoContacto
+    form_class = GrupoContactoCreationForm
+    template_name = 'meetLink/contactos/grupo_create.html'
+    success_url = reverse_lazy('contactos')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user          # pasamos el usuario al formulario
+        return kwargs
+    
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user   # asignar el usuario que crea el grupo
+        return super().form_valid(form)
+
+class GrupoContactoUpdateView(LoginRequiredMixin, UpdateView):
+    model = GrupoContacto
+    form_class = GrupoContactoUpdateForm
+    template_name = 'meetLink/contactos/grupo_update.html'
+    success_url = reverse_lazy('contactos')
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(GrupoContacto, pk=self.kwargs['pk'], usuario=self.request.user)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        messages.success(self.request, "Grupo de contacto actualizado correctamente.")
+        return super().form_valid(form)
     
     
 
@@ -89,15 +158,46 @@ class ContactosUpdateView(LoginRequiredMixin, UpdateView):
 class EventosView(LoginRequiredMixin, TemplateView):
     template_name = 'meetLink/eventos/eventos.html'
     
+    
+    
 class EventosCreateView(LoginRequiredMixin, CreateView):
+    model = Evento
+    form_class = EventoCreationForm
     template_name = 'meetLink/eventos/eventos_create.html'
+    success_url = reverse_lazy('eventos')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+    
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+    
     
 class EventosDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'meetLink/eventos/eventos_delete.html'
     
-    
+
 class EventosUpdateView(LoginRequiredMixin, UpdateView):
+    model = Evento
+    form_class = EventoUpdateForm
     template_name = 'meetLink/eventos/eventos_update.html'
+    success_url = reverse_lazy('eventos')
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Evento, pk=self.kwargs['pk'], usuario=self.request.user)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        messages.success(self.request, "Grupo de contacto actualizado correctamente.")
+        return super().form_valid(form)
     
     
     
