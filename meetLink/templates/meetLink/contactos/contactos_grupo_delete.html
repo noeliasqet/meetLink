@@ -4,11 +4,11 @@
 
 <div id="form" class="d-flex align-items-center justify-content-center" style="background-color: #85D0B2;">
     <div id="form-card" class="p-5 bg-white rounded shadow">
-       <h2>¿Estás seguro de que quieres eliminar este evento?</h2>
+       <h2>¿Estás seguro de que quieres eliminar este grupo de contactos?</h2>
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Eliminar</button>
-        <a href="{% url 'eventos' %}" class="btn btn-secondary">Cancelar</a>
+        <a href="{% url 'contactos' %}" class="btn btn-secondary">Cancelar</a>
     </form>
     </div>
 </div>

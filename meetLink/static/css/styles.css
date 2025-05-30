@@ -208,33 +208,6 @@ main {
     padding: 2rem 1rem;
     overflow-y: auto;
 }
-/* 
-.resizable {
-    resize: horizontal;
-    overflow: auto;
-    min-width: 100px;
-    max-width: 100%;
-  } */
-
-
-/* #columna-eventos {
-    background-color: var(--negro);
-    height: 15rem;
-    position: static;
-    right: 0;
-    bottom: 0;
-    padding: 2rem 1rem;
-    overflow-y: auto;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: baseline;
-} 
-    background-color: var(--negro);
-    padding: 2rem 1rem;
-    overflow-y: auto;    
-*/
-
 
 
 /*********************************? CARDS EVENTOS **********************************/
@@ -357,6 +330,8 @@ main {
     display: flex !important;
     flex-direction: column !important;
     flex-grow: 1;
+    height: max-content;
+    min-height: 100vh;
 }
 
 #form-card {

@@ -57,8 +57,26 @@
 </nav>
 
 <!-- MAIN CONTENT -->
-<main class="main-content">
-    
+<main class="main-content d-flex align-items-center justify-content-center">
+    <div class="eventos-container-wrapper">
+
+        <!-- Container cards eventos -->
+        <div class="eventos-scroll d-flex flex-row overflow-auto gap-3 px-4 py-3">
+            {% for evento in eventos %}
+            <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
+                <h5 class="text-center fw-bold">{{ evento.nombre }}</h5>
+                <p class="text-center fst-italic mb-2">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
+                <p>{{ evento.descripcion }}</p>
+                <div class="d-flex justify-content-center gap-3 mt-2">
+                    <a href="{% url 'eventos_update' evento.id %}" class="btn btn-sm btn-primary">Modificar</a>
+                    <a href="{% url 'eventos_delete' evento.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No hay eventos disponibles.</p>
+            {% endfor %}
+        </div>
+    </div>
 </main>
 
 <script>
