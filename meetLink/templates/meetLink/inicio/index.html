@@ -61,18 +61,18 @@
             <div id="card-crearEvento" class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>
                 <p>Planifica una nueva actividad o viaje y compártelo con tus contactos.</p>
-                <a id="btn-crearEvento" href="#" class="btn btn-outline border-dark">CREAR</a>
+                <a id="btn-crearEvento" href="{% url 'eventos_create' %}" class="btn btn-outline border-dark">CREAR</a>
             </div>
         </div>
 
         <!-- Eventos -->
-        <div id="columna-eventos" class="scroll-events d-flex flex-wrap gap-3">
+        <div id="columna-eventos" class="scroll-events d-flex flex-column gap-3">
             {% for evento in eventos %}
-                <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px;">
-                    <h5>{{ evento.nombre }}</h5>
-                    <small>{{ evento.fecha|date:"d/m/Y" }}</small>
-                    <p>{{ evento.descripcion|truncatewords:15 }}</p>
-                    <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a>
+                <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
+                    <h5 class="text-center fw-bold">{{ evento.nombre }}</h5>
+                    <p class="text-center fst-italic mb-2">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
+                    <p>{{ evento.descripcion }}</p>
+                    {% comment %} <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a> {% endcomment %}
                 </div>
             {% empty %}
                 <p class="text-light">Todavía no hay eventos disponibles.</p>

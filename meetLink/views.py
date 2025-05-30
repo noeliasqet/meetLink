@@ -20,7 +20,14 @@ class IndexView(LoginRequiredMixin, TemplateView):
         contexto = super().get_context_data(**otros)
         usuario = self.request.user
         contexto['usuario'] = usuario
+        contexto['eventos'] = Evento.objects.filter(usuario=usuario)
         return contexto
+    
+    # def get_context_data_eventos(self, **otros):
+    #     contexto = super().get_context_data_eventos(**otros)
+    #     usuario = self.request.user
+    #     contexto['eventos'] = Evento.objects.filter(usuario=usuario)
+    #     return contexto
     
   
 ############################! SESIÓN !###########################
@@ -158,6 +165,11 @@ class GrupoContactoUpdateView(LoginRequiredMixin, UpdateView):
 class EventosView(LoginRequiredMixin, TemplateView):
     template_name = 'meetLink/eventos/eventos.html'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        usuario = self.request.user
+        context['eventos'] = Evento.objects.filter(usuario=usuario)
+        return context
     
     
 class EventosCreateView(LoginRequiredMixin, CreateView):

@@ -158,8 +158,7 @@ main {
 /*********************************! CONTENIDO - drcha **********************************/
 
 #content{
-    justify-content: flex-end;
-    margin-right: 0;
+    width: fit-content;
 }
 
 
@@ -240,14 +239,14 @@ main {
 
 /*********************************? CARDS EVENTOS **********************************/
 .event-card {
-    background-color: #222;
+    background-color: var(--blanco);
     border-left: 4px solid var(--aqua);
     border-radius: 10px;
-    padding: 1rem;
+    max-height: min-content;
 }
 
 .event-card h5 {
-    color: var(--azul);
+    color: var(--rojo);
     margin-bottom: 0.3rem;
 }
 
@@ -275,7 +274,7 @@ main {
 
 /*********************************? SCROLLBAR EVENTO **********************************/
 .scroll-events {
-    max-height: 500px;
+    max-height: 100vh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--verde) #222;
