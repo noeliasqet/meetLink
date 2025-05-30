@@ -67,11 +67,19 @@ class CustomLogoutView(LogoutView):
 class ContactosView(LoginRequiredMixin, TemplateView):
     template_name = 'meetLink/contactos/contactos.html'
     login_url = 'meetLink/sesion/login/'
-    
+
     def get_context_data(self, **otros):
-        return super().get_context_data(**otros)
+        contexto = super().get_context_data(**otros)
         usuario = self.request.user
+
+        # Contactos y grupos del usuario autenticado
+        contactos = Contacto.objects.filter(usuario=usuario)
+        grupos = GrupoContacto.objects.filter(usuario=usuario).prefetch_related('integrantes')
+
         contexto['usuario'] = usuario
+        contexto['contactos'] = contactos
+        contexto['grupos'] = grupos
+
         return contexto
     
 class ContactosCreateView(LoginRequiredMixin, CreateView):
@@ -120,7 +128,7 @@ class ContactosDeleteView(LoginRequiredMixin, DeleteView):
 class GrupoContactoCreateView(LoginRequiredMixin, CreateView):
     model = GrupoContacto
     form_class = GrupoContactoCreationForm
-    template_name = 'meetLink/contactos/grupo_create.html'
+    template_name = 'meetLink/contactos/contactos_grupo_create.html'
     success_url = reverse_lazy('contactos')
 
     def get_form_kwargs(self):
@@ -135,7 +143,7 @@ class GrupoContactoCreateView(LoginRequiredMixin, CreateView):
 class GrupoContactoUpdateView(LoginRequiredMixin, UpdateView):
     model = GrupoContacto
     form_class = GrupoContactoUpdateForm
-    template_name = 'meetLink/contactos/grupo_update.html'
+    template_name = 'meetLink/contactos/contactos_grupo_update.html'
     success_url = reverse_lazy('contactos')
 
     def get_object(self, queryset=None):
@@ -153,7 +161,7 @@ class GrupoContactoUpdateView(LoginRequiredMixin, UpdateView):
     
 class GrupoContactosDeleteView(LoginRequiredMixin, DeleteView):
     model = GrupoContacto
-    template_name = 'meetLink/grupo/grupo_delete.html'
+    template_name = 'meetLink/contactos/contactos_grupo_delete.html'
     success_url = reverse_lazy('contacto')
     
     

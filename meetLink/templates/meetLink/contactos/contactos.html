@@ -3,8 +3,7 @@
 
 {% block contenido %}
 
-{% comment %} NAVBAR {% endcomment %}
-
+<!-- NAVBAR -->
 <nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
     <button class="toggle-btn" onclick="toggleSidebar()">
         <i class="fas fa-chevron-left"></i>
@@ -15,7 +14,7 @@
     </div>
 
     <div id="contenido-navbar" class="d-flex flex-column">
-        <div class="p-4" style="text-align: center; padding-bottom: 1rem">
+        <div class="p-4 text-center">
             <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
         </div>
 
@@ -57,8 +56,33 @@
 </nav>
 
 <!-- MAIN CONTENT -->
-<main class="main-content">
-   
+<main class="main-content d-flex align-items-center justify-content-center">
+    <div class="eventos-container-wrapper">
+
+        <!-- Contenedor de tarjetas de grupos -->
+        <div class="eventos-scroll d-flex flex-row flex-wrap justify-content-start gap-3 px-4 py-3">
+            {% for grupo in grupos %}
+            <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
+                <h5 class="text-center fw-bold">{{ grupo.nombre }}</h5>
+                <p class="text-center fst-italic mb-2">{{ grupo.contactos.count }} integrantes</p>
+                <p>{{ grupo.descripcion }}</p>
+                <div class="d-flex justify-content-center gap-3 mt-2">
+                    <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-primary">Modificar</a>
+                    <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No hay grupos de contactos disponibles.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Botón crear nuevo grupo o contacto -->
+        <div class="text-center mt-4">
+            <a href="{% url 'contactos_create' %}" class="btn btn-success">Nuevo contacto</a>
+            <a href="{% url 'grupo_create' %}" class="btn btn-success">Nuevo grupo de contactos</a>
+        </div>
+
+    </div>
 </main>
 
 <script>
@@ -69,4 +93,3 @@
 </script>
 
 {% endblock %}
-
