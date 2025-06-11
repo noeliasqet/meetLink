@@ -8,6 +8,7 @@
     --amarillo: #FFEDA4;
     --naranja: #FFC93F;
     --rojo: #FF6362;
+    --rojo2: #980000;
 
     --sidebar-width: 220px;
     --sidebar-width-collapsed: 80px;
@@ -42,6 +43,7 @@ main {
     align-content: center;
     background-color: var(--amarillo);
 }
+
 
 .collapsed~.main-content {
     margin-left: var(--sidebar-width-collapsed);
@@ -145,7 +147,7 @@ main {
 }
 
 .logout-btn:hover {
-    background-color: #ea120e;
+    background-color: var(--rojo2);
 }
 
 .navbar-footer {
@@ -219,7 +221,7 @@ main {
 }
 
 .event-card h5 {
-    color: var(--rojo);
+    color: var(--rojo2);
     margin-bottom: 0.3rem;
 }
 
@@ -232,18 +234,32 @@ main {
     font-size: 0.95rem;
 }
 
-/*********************************? BOTONES EVENTO **********************************/
-.event-card a.btn {
+/*********************************? BOTONES MODIFICAR/ELIMINAR **********************************/
+.btn-modificar {
     background-color: transparent;
-    border: 1px solid var(--verde);
+    border: 1px solid var(--aqua);
     color: var(--aqua);
     font-size: 0.85rem;
 }
 
-.event-card a.btn:hover {
+.btn-modificar:hover {
     background-color: var(--verde);
-    color: black;
+    color: var(--negro);
 }
+
+.btn-eliminar {
+    background-color: transparent;
+    border: 1px solid var(--rojo2);
+    color: var(--rojo2);
+    font-size: 0.85rem;
+}
+
+.btn-eliminar:hover {
+    background-color: var(--rojo2);
+    color: var(--blanco);
+}
+
+
 
 /*********************************? SCROLLBAR EVENTO **********************************/
 .scroll-events {

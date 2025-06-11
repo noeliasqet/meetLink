@@ -67,8 +67,8 @@
                 <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.contactos.count }} integrantes</p>
                 <p alt="Descripción del grupo">{{ grupo.descripcion }}</p>
                 <div class="d-flex justify-content-center gap-3 mt-2">
-                    <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-primary" alt="Modificar">Modificar</a>
-                    <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-danger" alt="Eliminar">Eliminar</a>
+                    <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-modificar" alt="Modificar">Modificar</a>
+                    <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar">Eliminar</a>
                 </div>
             </div>
             {% empty %}
@@ -78,8 +78,8 @@
 
         <!-- Botón crear nuevo grupo o contacto -->
         <div class="text-center mt-4">
-            <a href="{% url 'contactos_create' %}" class="btn btn-success" alt="Nuevo contacto">Nuevo contacto</a>
-            <a href="{% url 'grupo_create' %}" class="btn btn-success" alt="Nuevo grupo de contactos">Nuevo grupo de contactos</a>
+            <a href="{% url 'contactos_create' %}" class="btn btn-outline" style="background-color: #85D0B2;" alt="Nuevo contacto">Nuevo contacto</a>
+            <a href="{% url 'grupo_create' %}" class="btn btn-outline" style="background-color: #85D0B2;" alt="Nuevo grupo de contactos">Nuevo grupo de contactos</a>
         </div>
 
     </div>
