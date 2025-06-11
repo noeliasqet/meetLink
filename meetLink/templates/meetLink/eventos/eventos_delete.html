@@ -7,8 +7,8 @@
        <h2>¿Estás seguro de que quieres eliminar este evento?</h2>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-        <a href="{% url 'eventos' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger" alt="Eliminar evento">Eliminar</button>
+        <a href="{% url 'eventos' %}" class="btn btn-secondary" alt="Cancelar">Cancelar</a>
     </form>
     </div>
 </div>

@@ -4,39 +4,39 @@
 {% block contenido %}
 
 <nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
-    <button class="toggle-btn" onclick="toggleSidebar()">
+    <button class="toggle-btn" onclick="toggleSidebar()" alt="Minimizar/ampliar menú">
         <i class="fas fa-chevron-left"></i>
     </button>
 
     <div class="d-md-none">
-        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar">×</button>
+        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar" alt="Cerrar">×</button>
     </div>
 
     <div id="contenido-navbar" class="d-flex flex-column">
         <div class="p-4 text-center pb-3">
-            <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
+            <h4 class="logo-text fw-bold mb-0" alt="Logo MeetLink">meetL!nk</h4>
         </div>
 
         <div class="user-info text-center mb-4">
             <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
-            <h5 class="text-white mb-0 hide-on-collapse">{{ user.username }}</h5>
+            <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
         </div>
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="sidebar-link active text-decoration-none" href="{% url 'index' %}">
+                <a class="sidebar-link active text-decoration-none" href="{% url 'index' %}" alt="Inicio">
                     <i class="fas fa-home me-2"></i>
                     <span class="hide-on-collapse">INICIO</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="sidebar-link text-decoration-none" href="{% url 'contactos' %}">
+                <a class="sidebar-link text-decoration-none" href="{% url 'contactos' %}" alt="Contactos">
                     <i class="fas fa-address-book me-2"></i>
                     <span class="hide-on-collapse">CONTACTOS</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="sidebar-link text-decoration-none" href="{% url 'eventos' %}">
+                <a class="sidebar-link text-decoration-none" href="{% url 'eventos' %}" alt="Eventos">
                     <i class="fas fa-calendar-alt me-2"></i>
                     <span class="hide-on-collapse">EVENTOS</span>
                 </a>
@@ -45,7 +45,7 @@
 
         <form action="{% url 'logout' %}" method="post" class="mt-auto text-center">
             {% csrf_token %}
-            <button type="submit" class="btn logout-btn mt-4 hide-on-collapse">Log Out</button>
+            <button type="submit" class="btn logout-btn mt-4 hide-on-collapse" alt="Logout">Log Out</button>
         </form>
 
         <div class="navbar-footer">
@@ -61,7 +61,7 @@
             <div id="card-crearEvento" class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>
                 <p>Planifica una nueva actividad o viaje y compártelo con tus contactos.</p>
-                <a id="btn-crearEvento" href="{% url 'eventos_create' %}" class="btn btn-outline border-dark">CREAR</a>
+                <a id="btn-crearEvento" href="{% url 'eventos_create' %}" class="btn btn-outline border-dark" alt="Crear evento">CREAR</a>
             </div>
         </div>
 
@@ -69,9 +69,9 @@
         <div id="columna-eventos" class="scroll-events d-flex flex-column gap-3">
             {% for evento in eventos %}
                 <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
-                    <h5 class="text-center fw-bold">{{ evento.nombre }}</h5>
-                    <p class="text-center fst-italic mb-2">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
-                    <p>{{ evento.descripcion }}</p>
+                    <h5 class="text-center fw-bold" alt="Nombre del evento">{{ evento.nombre }}</h5>
+                    <p class="text-center fst-italic mb-2" alt="Fecha del evento">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
+                    <p alt="Descripción del evento">{{ evento.descripcion }}</p>
                     {% comment %} <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a> {% endcomment %}
                 </div>
             {% empty %}

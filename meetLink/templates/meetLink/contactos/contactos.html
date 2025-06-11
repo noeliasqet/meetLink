@@ -5,12 +5,12 @@
 
 <!-- NAVBAR -->
 <nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
-    <button class="toggle-btn" onclick="toggleSidebar()">
+    <button class="toggle-btn" onclick="toggleSidebar()" alt="Minimizar/ampliar menú">
         <i class="fas fa-chevron-left"></i>
     </button>
 
     <div class="d-md-none">
-        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar">×</button>
+        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar" alt="Cerrar">×</button>
     </div>
 
     <div id="contenido-navbar" class="d-flex flex-column">
@@ -20,24 +20,24 @@
 
         <div class="user-info text-center mb-4">
             <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
-            <h5 class="text-white mb-0 hide-on-collapse">{{ user.username }}</h5>
+            <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
         </div>
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="sidebar-link text-decoration-none" href="{% url 'index' %}">
+                <a class="sidebar-link text-decoration-none" href="{% url 'index' %}" alt="Inicio">
                     <i class="fas fa-home me-2"></i>
                     <span class="hide-on-collapse">INICIO</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="sidebar-link active text-decoration-none" href="{% url 'contactos' %}">
+                <a class="sidebar-link active text-decoration-none" href="{% url 'contactos' %}" alt="Contactos">
                     <i class="fas fa-address-book me-2"></i>
                     <span class="hide-on-collapse">CONTACTOS</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="sidebar-link text-decoration-none" href="{% url 'eventos' %}">
+                <a class="sidebar-link text-decoration-none" href="{% url 'eventos' %}" alt="Eventos">
                     <i class="fas fa-calendar-alt me-2"></i>
                     <span class="hide-on-collapse">EVENTOS</span>
                 </a>
@@ -46,7 +46,7 @@
 
         <form action="{% url 'logout' %}" method="post" class="mt-auto text-center">
             {% csrf_token %}
-            <button type="submit" class="btn logout-btn mt-4 hide-on-collapse">Log Out</button>
+            <button type="submit" class="btn logout-btn mt-4 hide-on-collapse" alt="Logout">Log Out</button>
         </form>
 
         <div class="navbar-footer">
@@ -63,12 +63,12 @@
         <div class="eventos-scroll d-flex flex-row flex-wrap justify-content-start gap-3 px-4 py-3">
             {% for grupo in grupos %}
             <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
-                <h5 class="text-center fw-bold">{{ grupo.nombre }}</h5>
-                <p class="text-center fst-italic mb-2">{{ grupo.contactos.count }} integrantes</p>
-                <p>{{ grupo.descripcion }}</p>
+                <h5 class="text-center fw-bold" alt="Nombre del grupo">{{ grupo.nombre }}</h5>
+                <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.contactos.count }} integrantes</p>
+                <p alt="Descripción del grupo">{{ grupo.descripcion }}</p>
                 <div class="d-flex justify-content-center gap-3 mt-2">
-                    <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-primary">Modificar</a>
-                    <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-primary" alt="Modificar">Modificar</a>
+                    <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-danger" alt="Eliminar">Eliminar</a>
                 </div>
             </div>
             {% empty %}
@@ -78,8 +78,8 @@
 
         <!-- Botón crear nuevo grupo o contacto -->
         <div class="text-center mt-4">
-            <a href="{% url 'contactos_create' %}" class="btn btn-success">Nuevo contacto</a>
-            <a href="{% url 'grupo_create' %}" class="btn btn-success">Nuevo grupo de contactos</a>
+            <a href="{% url 'contactos_create' %}" class="btn btn-success" alt="Nuevo contacto">Nuevo contacto</a>
+            <a href="{% url 'grupo_create' %}" class="btn btn-success" alt="Nuevo grupo de contactos">Nuevo grupo de contactos</a>
         </div>
 
     </div>
