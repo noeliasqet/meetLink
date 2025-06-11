@@ -8,6 +8,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from .forms import UsuarioCreationForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm
 from .models import Contacto, GrupoContacto, Evento
+from .utils.automails import enviar_mail_evento
 
 
 
@@ -191,7 +192,16 @@ class EventosCreateView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.usuario = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+
+        evento = form.instance
+        grupo = evento.grupo
+
+        if grupo:
+            emails = grupo.integrantes.values_list('mail', flat=True)
+            enviar_mail_evento(evento, emails)
+
+        return response
     
     
 class EventosDeleteView(LoginRequiredMixin, DeleteView):
