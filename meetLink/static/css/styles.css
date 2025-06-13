@@ -358,3 +358,8 @@ main {
     max-height: 90%;
     margin: 2rem;
 }
+
+a {
+    color: var(--rojo2);
+    text-decoration: none;
+}
