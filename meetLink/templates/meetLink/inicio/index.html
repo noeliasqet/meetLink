@@ -64,20 +64,6 @@
                 <a id="btn-crearEvento" href="{% url 'eventos_create' %}" class="btn btn-outline border-dark" alt="Crear evento">CREAR</a>
             </div>
         </div>
-
-        <!-- Eventos -->
-        <div id="columna-eventos" class="scroll-events d-flex flex-column gap-3">
-            {% for evento in eventos %}
-                <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
-                    <h5 class="text-center fw-bold" alt="Nombre del evento">{{ evento.nombre }}</h5>
-                    <p class="text-center fst-italic mb-2" alt="Fecha del evento">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
-                    <p alt="Descripción del evento">{{ evento.descripcion }}</p>
-                    {% comment %} <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-outline-light">Ver más</a> {% endcomment %}
-                </div>
-            {% empty %}
-                <p class="text-light">Todavía no hay eventos disponibles.</p>
-            {% endfor %}
-        </div>
     </div>
 </main>
 

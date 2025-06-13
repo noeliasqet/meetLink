@@ -30,15 +30,15 @@ class ContactoUpdateForm(forms.ModelForm):
 class GrupoContactoCreationForm(forms.ModelForm):
     class Meta:
         model = GrupoContacto
-        fields = ['nombre', 'descripcion', 'integrantes']  # No incluimos usuario, lo asignamos en la vista
+        fields = ['nombre', 'descripcion', 'integrantes']   # No se incluye user porque se añade en la vista
         widgets = {
-            'integrantes': forms.CheckboxSelectMultiple(),  # Muestra checkboxes en vez de select múltiple
+            'integrantes': forms.CheckboxSelectMultiple(),  # Muestra checkboxes
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')  # Extraemos el usuario que pasamos desde la vista
+        user = kwargs.pop('user')                           # Extraer el usuario que pasamos desde la vista
         super().__init__(*args, **kwargs)
-        # Filtramos los contactos para que solo salgan los del usuario logueado
+        # Filtrar los contactos para que solo salgan los del usuario logueado:
         self.fields['integrantes'].queryset = Contacto.objects.filter(usuario=user)
 
 class GrupoContactoUpdateForm(forms.ModelForm):

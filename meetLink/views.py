@@ -21,7 +21,6 @@ class IndexView(LoginRequiredMixin, TemplateView):
         contexto = super().get_context_data(**otros)
         usuario = self.request.user
         contexto['usuario'] = usuario
-        contexto['eventos'] = Evento.objects.filter(usuario=usuario)
         return contexto
     
   
@@ -163,7 +162,7 @@ class GrupoContactoUpdateView(LoginRequiredMixin, UpdateView):
 class GrupoContactosDeleteView(LoginRequiredMixin, DeleteView):
     model = GrupoContacto
     template_name = 'meetLink/contactos/contactos_grupo_delete.html'
-    success_url = reverse_lazy('contacto')
+    success_url = reverse_lazy('contactos')
     
     
 

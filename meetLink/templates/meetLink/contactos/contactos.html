@@ -57,29 +57,29 @@
 
 <!-- MAIN CONTENT -->
 <main class="main-content d-flex align-items-center justify-content-center">
-    <div class="eventos-container-wrapper">
+    <div class="d-flex flex-column flex-grow-1 m-4 p-3" style="min-height: 80vh; max-height: 90vh; overflow: hidden; width: 100%;">
 
-        <!-- Contenedor de tarjetas de grupos -->
-        <div class="eventos-scroll d-flex flex-row flex-wrap justify-content-start gap-3 px-4 py-3">
+        <!-- Contenedor de tarjetas -->
+        <div class="d-flex flex-wrap justify-content-center align-content-start overflow-auto gap-4 p-3 flex-grow-1">
             {% for grupo in grupos %}
-            <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
+            <div class="glass-box card event-card p-3 flex-grow-1" style="flex: 1 1 18rem; max-width: 20rem;">
                 <h5 class="text-center fw-bold" alt="Nombre del grupo">{{ grupo.nombre }}</h5>
-                <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.contactos.count }} integrantes</p>
+                <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.integrantes.count }} integrantes</p>
                 <p alt="Descripción del grupo">{{ grupo.descripcion }}</p>
-                <div class="d-flex justify-content-center gap-3 mt-2">
+                <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-modificar" alt="Modificar">Modificar</a>
                     <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar">Eliminar</a>
                 </div>
             </div>
             {% empty %}
-            <p class="text-center">No hay grupos de contactos disponibles.</p>
+            <p class="text-center text-white">No hay grupos de contactos disponibles.</p>
             {% endfor %}
         </div>
 
-        <!-- Botón crear nuevo grupo o contacto -->
-        <div class="text-center mt-4">
-            <a href="{% url 'contactos_create' %}" class="btn btn-outline" style="background-color: #85D0B2;" alt="Nuevo contacto">Nuevo contacto</a>
-            <a href="{% url 'grupo_create' %}" class="btn btn-outline" style="background-color: #85D0B2;" alt="Nuevo grupo de contactos">Nuevo grupo de contactos</a>
+        <!-- Botones inferior -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'contactos_create' %}" class="btn btn-outline" alt="Nuevo contacto">Nuevo contacto</a>
+            <a href="{% url 'grupo_create' %}" class="btn btn-outline" alt="Nuevo grupo de contactos">Nuevo grupo de contactos</a>
         </div>
 
     </div>

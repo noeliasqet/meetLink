@@ -3,8 +3,7 @@
 
 {% block contenido %}
 
-{% comment %} NAVBAR {% endcomment %}
-
+<!-- NAVBAR -->
 <nav id="navbar" class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
     <button class="toggle-btn" onclick="toggleSidebar()" alt="Minimizar/ampliar menú">
         <i class="fas fa-chevron-left"></i>
@@ -15,7 +14,7 @@
     </div>
 
     <div id="contenido-navbar" class="d-flex flex-column">
-        <div class="p-4" style="text-align: center; padding-bottom: 1rem">
+        <div class="p-4 text-center">
             <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
         </div>
 
@@ -58,24 +57,30 @@
 
 <!-- MAIN CONTENT -->
 <main class="main-content d-flex align-items-center justify-content-center">
-    <div class="eventos-container-wrapper">
+    <div class="d-flex flex-column flex-grow-1 m-4 p-3" style="min-height: 80vh; max-height: 90vh; overflow: hidden; width: 100%;">
 
-        <!-- Container cards eventos -->
-        <div class="eventos-scroll d-flex flex-row overflow-auto gap-3 px-4 py-3">
+        <!-- Contenedor de tarjetas -->
+        <div class="d-flex flex-wrap justify-content-center align-content-start overflow-auto gap-4 p-3 flex-grow-1">
             {% for evento in eventos %}
-            <div class="card event-card p-3" style="flex: 1 1 250px; max-width: 300px; margin: 10px;">
+            <div class="glass-box card p-3 flex-grow-1" style="flex: 1 1 18rem; max-width: 20rem;">
                 <h5 class="text-center fw-bold" alt="Nombre del evento">{{ evento.nombre }}</h5>
-                <p class="text-center fst-italic mb-2" alt="Fecha del evento">{{ evento.fecha_inicio|date:"d/m/Y H:i" }}</p>
+                <p class="text-center fst-italic mb-2" alt="Fecha del evento">{{ evento.fecha_inicio|date:"d/m/Y - H:i" }}</p>
                 <p alt="Descripción del evento">{{ evento.descripcion }}</p>
-                <div class="d-flex justify-content-center gap-3 mt-2">
+                <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="{% url 'eventos_update' evento.id %}" class="btn btn-sm btn-modificar" alt="Modificar evento">Modificar</a>
-                    <a href="{% url 'eventos_delete' evento.id %}" class="btn btn-sm btn-eliminar" alt="Elimiar evento">Eliminar</a>
+                    <a href="{% url 'eventos_delete' evento.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar evento">Eliminar</a>
                 </div>
             </div>
             {% empty %}
-            <p class="text-center">No hay eventos disponibles.</p>
+            <p class="text-center text-white">No hay eventos disponibles.</p>
             {% endfor %}
         </div>
+
+        <!-- Botón inferior -->
+        <div class="d-flex justify-content-center mt-4">
+            <a href="{% url 'eventos_create' %}" class="btn btn-outline" alt="Nuevo evento">Nuevo evento</a>
+        </div>
+
     </div>
 </main>
 
@@ -87,4 +92,3 @@
 </script>
 
 {% endblock %}
-
