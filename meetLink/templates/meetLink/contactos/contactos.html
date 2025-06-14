@@ -19,7 +19,7 @@
         </div>
 
         <div class="user-info text-center mb-4">
-            <img src="{{ user.profile.image.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
+            <img src="{{ user.avatar.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
             <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
         </div>
 
