@@ -18,7 +18,11 @@
         </div>
 
         <div class="user-info text-center mb-4">
-            <img src="{{ user.avatar.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="Foto de perfil" class="rounded-circle">
+            {% else %}
+                <img src="/media/logo2.png" alt="Foto de perfil" class="rounded-circle">
+            {% endif %}
             <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
         </div>
 
@@ -56,7 +60,6 @@
 
 <main class="main-content">
     <div id="content" class="container-fluid d-flex flex-column flex-md-row justify-content-between">
-        <!-- Parte central -->
         <div id="columna-contenido" class="mb-4">
             <div id="card-crearEvento" class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>

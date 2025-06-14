@@ -19,7 +19,11 @@
         </div>
 
         <div class="user-info text-center mb-4">
-            <img src="{{ user.avatar.url|default:'/media/logo2.png' }}" alt="Foto de perfil" class="rounded-circle">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="Foto de perfil" class="rounded-circle">
+            {% else %}
+                <img src="/media/logo2.png" alt="Foto de perfil" class="rounded-circle">
+            {% endif %}
             <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
         </div>
 
@@ -58,7 +62,13 @@
 <!-- MAIN CONTENT -->
 <main class="main-content d-flex align-items-center justify-content-center">
     <div class="d-flex flex-column flex-grow-1 m-4 p-3" style="min-height: 80vh; max-height: 90vh; overflow: hidden; width: 100%;">
-
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <!-- Contenedor de tarjetas -->
         <div class="d-flex flex-wrap justify-content-center align-content-start overflow-auto gap-4 p-3 flex-grow-1">
             {% for grupo in grupos %}
