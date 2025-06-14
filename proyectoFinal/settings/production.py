@@ -3,7 +3,7 @@ from decouple import config
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'dominio_produccion']
+ALLOWED_HOSTS = ['localhost', 'https://meetlink-unou.onrender.com']
 
 DATABASES = {
     'default': {
