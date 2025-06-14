@@ -38,6 +38,7 @@ class GrupoContactoCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')                           # Extraer el usuario que pasamos desde la vista
         super().__init__(*args, **kwargs)
+        
         # Filtrar los contactos para que solo salgan los del usuario logueado:
         self.fields['integrantes'].queryset = Contacto.objects.filter(usuario=user)
 
@@ -50,20 +51,25 @@ class GrupoContactoUpdateForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        # Solo contactos del usuario actual
-        self.fields['integrantes'].queryset = Contacto.objects.filter(usuario=user)
+
+        # Solo mostrar contactos del usuario
+        self.fields['integrantes'].queryset = Contacto.objects.filter(usuario=self.user)
 
     def clean_nombre(self):
-        nombre = self.cleaned_data['nombre']
-        usuario = self.initial.get('usuario') or self.instance.usuario
+        nombre = self.cleaned_data.get('nombre')
 
-        nombreGrupo = GrupoContacto.objects.filter(nombre=nombre, usuario=usuario)
+        # Buscar grupos con ese nombre para el usuario actual:
+        grupo_existente = GrupoContacto.objects.filter(nombre=nombre, usuario=self.user)
+
+        # Excluir el grupo actual si es una edición (para eliminar error en formulario de editar)
         if self.instance.pk:
-            nombreGrupo = nombreGrupo.exclude(pk=self.instance.pk)
-        if nombreGrupo.exists():
+            grupo_existente = grupo_existente.exclude(pk=self.instance.pk)
+
+        if grupo_existente.exists():
             raise forms.ValidationError("Ya tienes un grupo con ese nombre.")
+
         return nombre
 
 
@@ -123,10 +129,7 @@ class EventoCreationForm(forms.ModelForm):
 class EventoUpdateForm(forms.ModelForm):
     class Meta:
         model = Evento
-        fields = [
-            'nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin',
-            'transporte', 'presupuesto', 'grupo', 'maleta', 'todo'
-        ]
+        fields = ['nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin', 'transporte', 'presupuesto', 'grupo', 'maleta', 'todo']
         widgets = {
             'fecha_inicio': DateTimeLocalInput(),
             'fecha_fin': DateTimeLocalInput(),
