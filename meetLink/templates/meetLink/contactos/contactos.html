@@ -64,8 +64,23 @@
             {% for grupo in grupos %}
             <div class="glass-box card event-card p-3 flex-grow-1" style="flex: 1 1 18rem; max-width: 20rem;">
                 <h5 class="text-center fw-bold" alt="Nombre del grupo">{{ grupo.nombre }}</h5>
-                <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.integrantes.count }} integrantes</p>
-                <p alt="Descripción del grupo">{{ grupo.descripcion }}</p>
+                <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.integrantes.count }} integrante(s)</p>
+
+                {% for contacto in grupo.integrantes.all %}
+                    <div class="d-flex align-items-center justify-content-between gap-2 px-2 py-1">
+                        <p class="mb-0 fw-bold flex-grow-1">{{ contacto.nombre }}</p>
+                        <a href="{% url 'contacto_update' contacto.id %}" class="btn btn-sm btn-outline-secondary p-1" alt="Editar">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a href="{% url 'contacto_delete' contacto.id %}" class="btn btn-sm btn-outline-danger p-1" alt="Eliminar">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+
+                {% empty %}
+                    <p class="text-center text-white">La agenda está vacía, ¡añade nuevos integrantes!</p>
+                {% endfor %}
+
                 <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="{% url 'grupo_update' grupo.id %}" class="btn btn-sm btn-modificar" alt="Modificar">Modificar</a>
                     <a href="{% url 'grupo_delete' grupo.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar">Eliminar</a>
