@@ -6,7 +6,7 @@
     <div id="form-card" class="p-5 bg-white rounded shadow">
         <div id="form-card" class="content">
             <h2 class="mb-4 text-center">Registro</h2>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     {{ form.as_p }}
