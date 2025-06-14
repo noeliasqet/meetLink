@@ -66,6 +66,9 @@
                 <h5 class="text-center fw-bold" alt="Nombre del evento">{{ evento.nombre }}</h5>
                 <p class="text-center fst-italic mb-2" alt="Fecha del evento">{{ evento.fecha_inicio|date:"d/m/Y - H:i" }}</p>
                 <p alt="Descripción del evento">{{ evento.descripcion }}</p>
+                {% if evento.presupuesto %}
+                    <a href="{% url 'evento_presupuesto' evento.id %}" class="btn btn-recurso btn-sm">Presupuesto</a>
+                {% endif %}
                 <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="{% url 'eventos_update' evento.id %}" class="btn btn-sm btn-modificar" alt="Modificar evento">Modificar</a>
                     <a href="{% url 'eventos_delete' evento.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar evento">Eliminar</a>

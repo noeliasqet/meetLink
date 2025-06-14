@@ -37,7 +37,6 @@ html, body {
     overflow-x: hidden;
 }
 
-
 main {
     min-height: 100vh;
     margin-left: var(--sidebar-width);
@@ -257,6 +256,18 @@ main {
 .btn-eliminar:hover {
     background-color: var(--rojo);
     color: var(--blanco);
+}
+
+.btn-recurso {
+    background-color: transparent;
+    border: 1px solid var(--naranja);
+    color: var(--naranja);
+    font-size: 0.85rem;
+}
+
+.btn-recurso:hover {
+    background-color: var(--naranja);
+    color: var(--negro);
 }
 
 

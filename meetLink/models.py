@@ -45,7 +45,7 @@ class Contacto(models.Model):
 class GrupoContacto(models.Model):
     nombre = models.CharField(max_length=20, verbose_name="Nombre del grupo")
     descripcion = models.CharField(max_length=40, verbose_name="Descripción del grupo")
-    integrantes = models.ManyToManyField('Contacto', blank=True, verbose_name="Integrantes")
+    integrantes = models.ManyToManyField('Contacto', blank=True, verbose_name="Integrantes (Mantén Ctrl para seleccionar varios)")
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
 
     def __str__(self):

@@ -62,7 +62,7 @@
         <!-- Contenedor de tarjetas -->
         <div class="d-flex flex-wrap justify-content-center align-content-start overflow-auto gap-4 p-3 flex-grow-1">
             {% for grupo in grupos %}
-            <div class="glass-box card event-card p-3 flex-grow-1" style="flex: 1 1 18rem; max-width: 20rem;">
+            <div class="glass-box card event-card p-3 flex-grow-1" style="flex: 1 1 18rem; max-width: 20rem; min-width: min-content;">
                 <h5 class="text-center fw-bold" alt="Nombre del grupo">{{ grupo.nombre }}</h5>
                 <p class="text-center fst-italic mb-2" alt="Nº de integrantes">{{ grupo.integrantes.count }} integrante(s)</p>
 

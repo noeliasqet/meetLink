@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from .forms import UsuarioCreationForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm
+from .forms import UsuarioCreationForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm, PresupuestoForm
 from .models import Contacto, GrupoContacto, Evento
 from .utils.automails import enviar_mail_evento
 
@@ -227,6 +227,29 @@ class EventosUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.usuario = self.request.user
         messages.success(self.request, "Grupo de contacto actualizado correctamente.")
         return super().form_valid(form)
+    
+    
+class EventoPresupuestoView(LoginRequiredMixin, UpdateView):
+    model = Evento
+    form_class = PresupuestoForm
+    template_name = 'meetLink/recursos/presupuesto.html'
+    success_url = reverse_lazy('eventos')
+
+    def get_queryset(self):
+        return Evento.objects.filter(usuario=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        evento = self.object
+
+        total = (evento.p_alojamiento + evento.p_transporte + evento.p_comida + evento.p_otros)
+
+        integrantes = evento.grupo.integrantes.count() if evento.grupo else 0
+        por_persona = total / integrantes if integrantes else None
+
+        context['total'] = total
+        context['por_persona'] = por_persona
+        return context
     
     
     

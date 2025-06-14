@@ -32,7 +32,10 @@ class GrupoContactoCreationForm(forms.ModelForm):
         model = GrupoContacto
         fields = ['nombre', 'descripcion', 'integrantes']   # No se incluye user porque se añade en la vista
         widgets = {
-            'integrantes': forms.CheckboxSelectMultiple(),  # Muestra checkboxes
+            'integrantes': forms.SelectMultiple(attrs={
+                'class': 'form-select',
+                'size': 5  # Opciones visibles en la lista
+            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -47,7 +50,10 @@ class GrupoContactoUpdateForm(forms.ModelForm):
         model = GrupoContacto
         fields = ['nombre', 'descripcion', 'integrantes']
         widgets = {
-            'integrantes': forms.CheckboxSelectMultiple(),
+            'integrantes': forms.SelectMultiple(attrs={
+                'class': 'form-select',
+                'size': 5  # Opciones visibles en la lista
+            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -84,7 +90,8 @@ class DateTimeLocalInput(forms.DateTimeInput):
         if value is None:
             return ''
         return value.strftime('%Y-%m-%dT%H:%M')
-    
+
+
 class EventoCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -95,10 +102,16 @@ class EventoCreationForm(forms.ModelForm):
 
     class Meta:
         model = Evento
-        fields = ['nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin', 'transporte', 'presupuesto', 'grupo', 'maleta', 'todo']
+        fields = [
+            'nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin',
+            'transporte', 'presupuesto', 'grupo', 'maleta', 'todo'
+        ]
         widgets = {
             'fecha_inicio': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
             'fecha_fin': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'presupuesto': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
+            'maleta': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
+            'todo': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
         }
 
     def clean(self):
@@ -129,19 +142,21 @@ class EventoCreationForm(forms.ModelForm):
 class EventoUpdateForm(forms.ModelForm):
     class Meta:
         model = Evento
-        fields = ['nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin', 'transporte', 'presupuesto', 'grupo', 'maleta', 'todo']
+        fields = [
+            'nombre', 'descripcion', 'ubicacion', 'fecha_inicio', 'fecha_fin',
+            'transporte', 'presupuesto', 'grupo', 'maleta', 'todo'
+        ]
         widgets = {
             'fecha_inicio': DateTimeLocalInput(),
             'fecha_fin': DateTimeLocalInput(),
-            'presupuesto': forms.CheckboxInput(),
-            'maleta': forms.CheckboxInput(),
-            'todo': forms.CheckboxInput(),
+            'presupuesto': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
+            'maleta': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
+            'todo': forms.Select(choices=[(True, 'Sí'), (False, 'No')]),
         }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        # Solo grupos del usuario
         self.fields['grupo'].queryset = GrupoContacto.objects.filter(usuario=self.user)
         self.fields['grupo'].empty_label = "Selecciona un grupo"
 
@@ -160,9 +175,36 @@ class EventoUpdateForm(forms.ModelForm):
         fecha_inicio = cleaned_data.get('fecha_inicio')
         fecha_fin = cleaned_data.get('fecha_fin')
 
+        from django.utils import timezone
         now = timezone.now()
 
         if fecha_inicio and fecha_inicio < now:
             self.add_error('fecha_inicio', "La fecha de inicio no puede ser anterior a hoy.")
         if fecha_inicio and fecha_fin and fecha_fin < fecha_inicio:
             self.add_error('fecha_fin', "La fecha de fin no puede ser anterior a la de inicio.")
+
+        return cleaned_data
+
+            
+            
+            
+############################! PRESUPUESTO !###########################
+         
+class PresupuestoForm(forms.ModelForm):
+    class Meta:
+        model = Evento
+        fields = ['p_alojamiento', 'p_transporte', 'p_comida', 'p_otros']
+        widgets = {
+            'p_alojamiento': forms.NumberInput(attrs={'step': '0.01', 'min': '0'}),
+            'p_transporte': forms.NumberInput(attrs={'step': '0.01', 'min': '0'}),
+            'p_comida': forms.NumberInput(attrs={'step': '0.01', 'min': '0'}),
+            'p_otros': forms.NumberInput(attrs={'step': '0.01', 'min': '0'}),
+        }
+
+    def total(self):
+        return sum([
+            self.cleaned_data.get('p_alojamiento', 0),
+            self.cleaned_data.get('p_transporte', 0),
+            self.cleaned_data.get('p_comida', 0),
+            self.cleaned_data.get('p_otros', 0),
+        ])
