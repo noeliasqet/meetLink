@@ -28,7 +28,7 @@
             {% if por_persona %}
                 <p class="text-center"><strong>Por persona ({{ object.grupo.integrantes.count }} integrantes):</strong> €{{ por_persona|floatformat:2 }}</p>
             {% else %}
-                <p class="text-muted text-center">Asigna un grupo para calcular el precio por persona.</p>
+                <p class="text-muted text-center">Asigna un gasto para calcular el precio por persona.</p>
             {% endif %}
 
             <p class="mt-3 text-center">

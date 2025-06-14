@@ -99,6 +99,7 @@ class EventoCreationForm(forms.ModelForm):
         if self.user:
             self.fields['grupo'].queryset = self.user.grupocontacto_set.all()
             self.fields['grupo'].empty_label = "Selecciona un grupo"
+            self.fields['grupo'].required = True
 
     class Meta:
         model = Evento
