@@ -1,3 +1,6 @@
+import os
+from django.conf import settings
+from django.http import FileResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, View
 from django.contrib import messages
@@ -250,6 +253,24 @@ class EventoPresupuestoView(LoginRequiredMixin, UpdateView):
         context['total'] = total
         context['por_persona'] = por_persona
         return context
+    
+    
+class DescargarPDFView(LoginRequiredMixin, View):
+    def get(self, request, tipo):
+        if tipo == "maleta":
+            filename = "pdf/Maleta.pdf"
+        elif tipo == "todo":
+            filename = "pdf/ToDo.pdf"
+        else:
+            raise Http404("No está seleccionando el tipo de documento correcto.")
+
+        file_path = settings.MEDIA_ROOT / filename
+
+        if not file_path.exists():
+            raise Http404("Archivo no encontrado.")
+
+        return FileResponse(open(file_path, 'rb'), content_type='application/pdf')
+
     
     
     

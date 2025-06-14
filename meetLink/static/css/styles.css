@@ -263,6 +263,7 @@ main {
     border: 1px solid var(--naranja);
     color: var(--naranja);
     font-size: 0.85rem;
+    margin: 0.1rem;
 }
 
 .btn-recurso:hover {

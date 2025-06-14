@@ -32,6 +32,7 @@ urlpatterns = [
     path('eventos/update/<int:pk>', EventosUpdateView.as_view(), name='eventos_update'),
     path('eventos/delete/<int:pk>', EventosDeleteView.as_view(), name='eventos_delete'),
     path('eventos/<int:pk>/presupuesto/', EventoPresupuestoView.as_view(), name='evento_presupuesto'),
+    path('descargar/<str:tipo>/', DescargarPDFView.as_view(), name='descargar_pdf'),
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

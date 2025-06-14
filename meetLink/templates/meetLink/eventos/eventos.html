@@ -69,6 +69,12 @@
                 {% if evento.presupuesto %}
                     <a href="{% url 'evento_presupuesto' evento.id %}" class="btn btn-recurso btn-sm">Presupuesto</a>
                 {% endif %}
+                {% if evento.maleta %}
+                    <a href="{% url 'descargar_pdf' 'maleta' %}" class="btn btn-recurso btn-sm">Descargar Maleta</a>
+                {% endif %}
+                {% if evento.todo %}
+                    <a href="{% url 'descargar_pdf' 'todo' %}" class="btn btn-recurso btn-sm">Descargar To-Do</a>
+                {% endif %}
                 <div class="d-flex justify-content-center gap-2 mt-3">
                     <a href="{% url 'eventos_update' evento.id %}" class="btn btn-sm btn-modificar" alt="Modificar evento">Modificar</a>
                     <a href="{% url 'eventos_delete' evento.id %}" class="btn btn-sm btn-eliminar" alt="Eliminar evento">Eliminar</a>
