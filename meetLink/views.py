@@ -54,7 +54,6 @@ class CustomLoginView(LoginView):
     template_name = 'meetLink/sesion/login.html'
     
     def form_valid(self, form):
-        messages.success(self.request, 'Bienvenido de nuevo a MeetL!nk :)')
         return super().form_valid(form)
 
 class CustomLogoutView(LogoutView):
