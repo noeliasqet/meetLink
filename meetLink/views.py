@@ -34,7 +34,7 @@ User = get_user_model()
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'nombre', 'apellidos', 'email', 'password1', 'password2', 'avatar']
+        fields = ['username', 'nombre', 'apellidos', 'email', 'password1', 'password2']
 
 class RegistroView(CreateView):
     form_class = UsuarioCreationForm

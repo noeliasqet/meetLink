@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 class UsuarioCreationForm(UserCreationForm):
     class Meta:
         model = Usuario
-        fields = ['username', 'nombre', 'apellidos', 'email', 'password1', 'password2', 'avatar']
+        fields = ['username', 'nombre', 'apellidos', 'email', 'password1', 'password2']
 
 
 
