@@ -79,7 +79,7 @@
                 {% for contacto in grupo.integrantes.all %}
                     <div class="d-flex align-items-center justify-content-between gap-2 px-2 py-1">
                         <p class="mb-0 fw-bold flex-grow-1">{{ contacto.nombre }}</p>
-                        <a href="{% url 'contacto_update' contacto.id %}" class="btn btn-sm btn-outline-secondary p-1" alt="Editar">
+                        <a href="{% url 'contacto_update' contacto.id %}" class="btn btn-sm btn-outline-light p-1" alt="Editar">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="{% url 'contacto_delete' contacto.id %}" class="btn btn-sm btn-outline-danger p-1" alt="Eliminar">

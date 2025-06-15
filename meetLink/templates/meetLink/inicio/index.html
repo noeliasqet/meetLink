@@ -60,15 +60,26 @@
 
 <main class="main-content">
     <div id="content" class="container-fluid d-flex flex-column flex-md-row justify-content-between">
-        <div id="columna-contenido" class="mb-4">
+        <div id="columna-contenido" class="mb-4 w-100 glass-box">
+            
+            <!-- HERO -->
+            <section class="hero-block d-flex flex-column justify-content-center">
+                <h1 class="hero-line">ORGANIZA </h1>
+                <h1 class="hero-line">CONECTA</h1>
+                <h1 class="hero-line outline">DISFRUTA.</h1>
+            </section>
+
+            <!-- CARD EVENTO -->
             <div id="card-crearEvento" class="card text p-3">
                 <h4><strong>¿Algo nuevo?</strong></h4>
                 <p>Planifica una nueva actividad o viaje y compártelo con tus contactos.</p>
                 <a id="btn-crearEvento" href="{% url 'eventos_create' %}" class="btn btn-outline border-dark" alt="Crear evento">CREAR</a>
             </div>
+
         </div>
     </div>
 </main>
+
 
 <script>
     function toggleSidebar() {
