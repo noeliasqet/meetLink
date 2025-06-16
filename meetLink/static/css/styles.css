@@ -10,8 +10,8 @@
     --rojo: #FF6362;
     --rojo2: #980000;
 
-    --sidebar-width: 220px;
-    --sidebar-width-collapsed: 80px;
+    --sidebar-width: 13.75rem;
+    --sidebar-width-collapsed: 5rem;
 }
 
 
@@ -64,18 +64,18 @@ main {
 
 .text-vacio {
     color: var(--blanco);
-    font-size: 36px;
+    font-size: 2.25rem;
 }
 
 /*********************************! GLASSBOX - DIVS **********************************/
 
 .glass-box {
     background: rgba(30, 30, 30, 0.4);
-    padding: 15px 20px;
-    margin: 10px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    margin: 0.6rem;
+    min-width: min-content;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);    
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -104,7 +104,6 @@ main {
     justify-content: space-between;
     padding: 2rem 1rem;
     z-index: 10;
-
 }
 
 .sidebar.collapsed {
@@ -114,7 +113,7 @@ main {
 .sidebar-link {
     color: var(--blanco);
     transition: all 0.2s ease;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -169,11 +168,11 @@ main {
 }
 
 #navbar .user-info img {
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--verde);
+    border: 0.125rem solid var(--verde);
     margin-bottom: 0.5rem;
 }
 
@@ -224,7 +223,7 @@ main {
     text-align: center;
     background-color: var(--negro);
     border: 2px solid var(--negro);
-    border-radius: 12px;
+    border-radius: 1rem;
     color: var(--blanco);
     max-width: 450px;
 }
@@ -249,10 +248,10 @@ main {
     padding: 1.5rem;
     backdrop-filter: blur(8px);
     background: rgba(0, 0, 0, 0.4);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 1000px;
+    max-width: 62.5rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -260,7 +259,7 @@ main {
 .hero-line {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    font-size: 120px;
+    font-size: 7.5rem;
     color: var(--blanco);
     margin: 0.3em 0;
     text-shadow: 0 0 10px rgba(107, 219, 173, 0.5);
@@ -324,12 +323,12 @@ main {
     background: rgba(0, 0, 0, 0.5);
     color: var(--naranja);
     border: 2px solid var(--naranja);
-    border-radius: 8px;
+    border-radius: 0.5rem;
     padding: 0.5rem 1.2rem;
     font-weight: 600;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(255, 201, 63, 0.2);
+    box-shadow: 0 0.25rem 0.75rem rgba(255, 201, 63, 0.2);
     text-decoration: none;
     display: inline-block;
 }
@@ -338,7 +337,7 @@ main {
     background: rgba(11, 27, 38, 0.7);
     color: var(--azul);
     border-color: var(--azul);
-    box-shadow: 0 6px 20px rgba(181, 248, 254, 0.4);
+    box-shadow: 0 0.4rem 1.25rem rgba(181, 248, 254, 0.4);
     cursor: pointer;
 }
 
@@ -353,12 +352,12 @@ main {
 }
 
 .scroll-events::-webkit-scrollbar {
-    width: 6px;
+    width: 0.37rem;
 }
 
 .scroll-events::-webkit-scrollbar-thumb {
     background-color: var(--verde);
-    border-radius: 4px;
+    border-radius: 0.25rem;
 }
 
 .scroll-events::-webkit-scrollbar-track {
@@ -420,14 +419,14 @@ main {
 /* Toggle button */
 .toggle-btn {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 0.63rem;
+    top: 0.63rem;
     background: white;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 1.87rem;
+    height: 1.87rem;
     border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.12rem 0.37rem rgba(0, 0, 0, 0.15);
     z-index: 9999;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -468,9 +467,9 @@ main {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    padding: 0.63rem;
+    margin-bottom: 0.63rem;
+    border-radius: 0.25rem;
     border: 1px solid #ddd;
 }
 
