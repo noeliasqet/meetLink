@@ -1,0 +1,33 @@
+{% extends "meetLink/base.html" %}
+
+{% block contenido %}
+
+<div id="form" class="d-flex align-items-center justify-content-center">
+    <div id="form-card" class="p-5 bg-white rounded shadow" style="max-width: 500px; width: 100%;">
+        <div class="content">
+            <h2 class="mb-4 text-center">Editar Perfil</h2>
+
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-success w-100" alt="Guardar cambios">Guardar Cambios</button>
+            </form>
+
+            <p class="mt-3 text-center">
+                <a href="{% url 'index' %}" alt="Volver a Perfil">← Volver a Perfil</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from .forms import UsuarioCreationForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm, PresupuestoForm
+from .forms import UsuarioCreationForm, UsuarioUpdateForm, ContactoCreationForm, ContactoUpdateForm, GrupoContactoCreationForm, GrupoContactoUpdateForm, EventoCreationForm, EventoUpdateForm, PresupuestoForm
 from .models import Contacto, GrupoContacto, Evento
 from .utils.automails import enviar_mail_evento
 
@@ -34,6 +34,26 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'nombre', 'apellidos', 'email', 'password1', 'password2']
+        
+        
+class UsuarioUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UsuarioUpdateForm
+    template_name = 'meetLink/inicio/usuario_update.html'
+    success_url = reverse_lazy('index')
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.request.user
+        return kwargs
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, pk=self.request.user.pk)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Perfil actualizado correctamente.")
+        return super().form_valid(form)
+
 
 class RegistroView(CreateView):
     form_class = UsuarioCreationForm

@@ -8,10 +8,6 @@
         <i class="fas fa-chevron-left"></i>
     </button>
 
-    <div class="d-md-none">
-        <button type="button" class="btn-close btn-close-white" onclick="toggleMenu()" aria-label="Cerrar" alt="Cerrar">×</button>
-    </div>
-
     <div id="contenido-navbar" class="d-flex flex-column">
         <div class="p-4 text-center">
             <h4 class="logo-text fw-bold mb-0">meetL!nk</h4>
@@ -23,7 +19,9 @@
             {% else %}
                 <img src="/media/logo2.png" alt="Foto de perfil" class="rounded-circle">
             {% endif %}
-            <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">{{ user.username }}</h5>
+            <h5 class="text-white mb-0 hide-on-collapse" alt="Nombre de usuario">
+                <a href="{% url 'usuario_update' %}" class="text-white text-decoration-none" title="Editar perfil">{{ user.username }}</a>
+            </h5>
         </div>
 
         <ul class="nav flex-column">
