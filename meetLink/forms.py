@@ -1,5 +1,5 @@
 from django import forms
-from django.utils import timezone
+from datetime import datetime
 from .models import Usuario, Contacto, GrupoContacto, Evento
 from django.contrib.auth.forms import UserCreationForm
 
@@ -89,6 +89,13 @@ class DateTimeLocalInput(forms.DateTimeInput):
     def format_value(self, value):
         if value is None:
             return ''
+        
+        if isinstance(value, str):
+            try:
+                value = datetime.strptime(value, '%Y-%m-%dT%H:%M')
+            except ValueError:
+                return ''
+
         return value.strftime('%Y-%m-%dT%H:%M')
 
 

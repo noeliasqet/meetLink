@@ -1,8 +1,7 @@
-import os
 from django.conf import settings
 from django.http import FileResponse, Http404
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, View
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model

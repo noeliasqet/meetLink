@@ -1,4 +1,3 @@
-# utils/emails.py
 from django.core.mail import send_mail
 from proyectoFinal.settings.base import DEFAULT_FROM_EMAIL
 from urllib.parse import urlencode
